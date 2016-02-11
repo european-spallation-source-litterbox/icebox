@@ -1,0 +1,11 @@
+{
+	"name": "RPi1",
+	"signals": [{
+		"name": "photoresistor1",
+		"RW": "R",
+		"scanRate": "1 second"
+	}, {
+		"name": "led1",
+		"RW": "W"
+	}]
+}
