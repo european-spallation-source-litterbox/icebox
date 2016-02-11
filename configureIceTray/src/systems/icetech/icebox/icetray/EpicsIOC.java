@@ -21,6 +21,7 @@ public class EpicsIOC {
 	public void setIceCube(JsonObject jsonInput) {
 		iceCube = new IceCube(jsonInput);
 	}
+	
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
