@@ -1,6 +1,8 @@
 package systems.icetech.icebox.icetray;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -29,10 +31,43 @@ public class EpicsIOC {
 
 	public void makeIceIOC() throws IOException {
 		makeBasicIOC();
+		fixConfigureRelease();
+
+		fixDbMakefile();
 		
 		writeDBFile();
 		
 		writeProtoFile();
+	}
+
+	private void fixDbMakefile() throws FileNotFoundException, IOException {
+		StringBuilder makefileStringBuilder = new StringBuilder();
+		File makefileFile = new File(iocTopDir + File.separator + iocNameString + "IOCApp/Db/Makefile");
+		BufferedReader makeFileReader = new BufferedReader(new FileReader(makefileFile));
+		String line;
+		while ((line = makeFileReader.readLine()) != null) {
+			makefileStringBuilder.append(line+"\n");
+			if (line.equals("#DB += xxx.db")) {
+				makefileStringBuilder.append("DB += arduino.db\n");
+			}
+		}
+		makeFileReader.close();
+		System.out.println(makefileStringBuilder);
+		makefileFile.delete();
+		makefileFile.createNewFile();
+		FileWriter makefileWriter = new FileWriter(makefileFile);
+		makefileWriter.write(makefileStringBuilder.toString());
+		makefileWriter.flush();
+		makefileWriter.close();
+	}
+
+	private void fixConfigureRelease() throws IOException {
+		File releaseFile = new File(iocTopDir + File.separator + "configure" + File.separator + "RELEASE");
+		FileWriter releaseFileWriter = new FileWriter(releaseFile);
+		releaseFileWriter.append("ASYN=/usr/local/epics/modules/asyn\n");
+		releaseFileWriter.append("STREAM=/usr/local/epics/modules/stream\n");
+		releaseFileWriter.flush();
+		releaseFileWriter.close();
 	}
 
 	private void writeProtoFile() throws IOException {
@@ -63,10 +98,39 @@ public class EpicsIOC {
 		if (!iocTopDir.mkdir()) {
 			throw new IOException("Could not create " + iocTopDir);
 		}
-		// TODO The following is only here for the dev env. It needs to be replaced with makeBaseApp.pl, etc.
-		File tempDir = new File(iocTopDir + File.separator + iocNameString + "IOCApp/Db/");
-		if (!tempDir.mkdirs()) {
-			throw new IOException("Could not create " + tempDir);
+		// TODO replace the following method with makeBaseApp.pl, etc.
+		pretendForDevEnv();
+	}
+
+	private void pretendForDevEnv() throws IOException {
+		// TODO This entire method is only here for the dev env. It needs to be replaced with makeBaseApp.pl, etc.
+		File dbDir = new File(iocTopDir + File.separator + iocNameString + "IOCApp/Db/");
+		if (!dbDir.mkdirs()) {
+			throw new IOException("Could not create " + dbDir);
+		}
+		File srcDir = new File(iocTopDir + File.separator + iocNameString + "IOCApp/src/");
+		if (!srcDir.mkdirs()) {
+			throw new IOException("Could not create " + srcDir);
+		}
+		File makefileFile = new File(dbDir + File.separator + "Makefile");
+		if (!makefileFile.createNewFile()) {
+			throw new IOException("Could not create " + makefileFile);
+		}
+		FileWriter makefileWriter = new FileWriter(makefileFile);
+		makefileWriter.append("blah blah\n");
+		makefileWriter.append("blah blah again\n");
+		makefileWriter.append("blah blah and again\n");
+		makefileWriter.append("#DB += xxx.db\n");
+		makefileWriter.append("blah blah and for the last time\n");
+		makefileWriter.flush();
+		makefileWriter.close();
+		File configDir = new File(iocTopDir + File.separator + "configure");
+		if (!configDir.mkdir()) {
+			throw new IOException("Could not create " + configDir);
+		}
+		File releaseFile = new File(configDir + File.separator + "RELEASE");
+		if (!releaseFile.createNewFile()) {
+			throw new IOException("Could not create " + releaseFile);
 		}
 	}
 	
@@ -76,7 +140,6 @@ public class EpicsIOC {
 			EpicsIOC epicsIOC = new EpicsIOC(Json.createReader(new FileReader(filepath + "example.json")).readObject());
 			epicsIOC.makeIceIOC();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
