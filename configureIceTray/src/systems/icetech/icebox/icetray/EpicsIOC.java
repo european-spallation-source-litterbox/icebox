@@ -25,8 +25,8 @@ public class EpicsIOC {
 			throw new IOException("Could not create" + iocTopDir);
 		}
 		
-		dbFileWriter = new FileWriter(new File(iocTopDir + "arduino.db"));
-		protoFileWriter = new FileWriter(new File(iocTopDir + "arduino.proto"));
+		dbFileWriter = new FileWriter(new File(iocTopDir + iocNameString + "IOCApp/Db/arduino.db"));
+		protoFileWriter = new FileWriter(new File(iocTopDir + iocNameString + "IOCApp/Db/arduino.proto"));
 	}
 	
 	public static void main(String[] args) {
