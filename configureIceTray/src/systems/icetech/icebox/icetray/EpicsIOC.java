@@ -8,24 +8,29 @@ import javax.json.JsonObject;
 
 public class EpicsIOC {
 	
-	private final String pathString;
+	private final String iocNameString;
 	private final FileWriter dbFileWriter, protoFileWriter;
-	private IceCube iceCube;
+	private final File iocTopDir;
+	private final IceCube iceCube;
 
-	public EpicsIOC(String inputPathString) throws IOException {
-		pathString = new String(inputPathString);
-		dbFileWriter = new FileWriter(new File(pathString + "arduino.db"));
-		protoFileWriter = new FileWriter(new File(pathString + "arduino.proto"));
-	}
-	
-	public void setIceCube(JsonObject jsonInput) {
+	public EpicsIOC(JsonObject jsonInput) throws IOException {
 		iceCube = new IceCube(jsonInput);
+		
+		iocNameString = new String(iceCube.getName());
+		iocTopDir = new File("/home/pi/Apps/epics/"+iocNameString+"IOC/");
+		if (iocTopDir.exists()) {
+			throw new IOException(iocTopDir + " already exists");
+		}
+		if (!iocTopDir.mkdir()) {
+			throw new IOException("Could not create" + iocTopDir);
+		}
+		
+		dbFileWriter = new FileWriter(new File(iocTopDir + "arduino.db"));
+		protoFileWriter = new FileWriter(new File(iocTopDir + "arduino.proto"));
 	}
 	
-
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
 	}
 
 }
