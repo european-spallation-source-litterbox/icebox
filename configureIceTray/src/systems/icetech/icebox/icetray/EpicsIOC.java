@@ -109,38 +109,41 @@ public class EpicsIOC {
 		if (!dbDir.mkdirs()) {
 			throw new IOException("Could not create " + dbDir);
 		}
-		File makefileFile = new File(dbDir + File.separator + "Makefile");
-		if (!makefileFile.createNewFile()) {
-			throw new IOException("Could not create " + makefileFile);
+		File dbMakefileFile = new File(dbDir + File.separator + "Makefile");
+		if (!dbMakefileFile.createNewFile()) {
+			throw new IOException("Could not create " + dbMakefileFile);
 		}
-		FileWriter makefileWriter = new FileWriter(makefileFile);
-		makefileWriter.append("blah blah\n");
-		makefileWriter.append("blah blah again\n");
-		makefileWriter.append("blah blah and again\n");
-		makefileWriter.append("#DB += xxx.db\n");
-		makefileWriter.append("blah blah and for the last time\n");
-		makefileWriter.flush();
-		makefileWriter.close();
+		FileWriter dbMakefileWriter = new FileWriter(dbMakefileFile);
+		dbMakefileWriter.append("blah blah\n");
+		dbMakefileWriter.append("blah blah again\n");
+		dbMakefileWriter.append("blah blah and again\n");
+		dbMakefileWriter.append("#DB += xxx.db\n");
+		dbMakefileWriter.append("blah blah and for the last time\n");
+		dbMakefileWriter.flush();
+		dbMakefileWriter.close();
+		
 		File configDir = new File(iocTopDir + File.separator + "configure");
 		if (!configDir.mkdir()) {
 			throw new IOException("Could not create " + configDir);
 		}
+		
 		File srcDir = new File(iocTopDir + File.separator + iocNameString + "IOCApp/src/");
 		if (!srcDir.mkdirs()) {
 			throw new IOException("Could not create " + srcDir);
 		}
-		File srcmakefileFile = new File(srcDir + File.separator + "Makefile");
-		if (!srcmakefileFile.createNewFile()) {
-			throw new IOException("Could not create " + srcmakefileFile);
+		File srcMakefileFile = new File(srcDir + File.separator + "Makefile");
+		if (!srcMakefileFile.createNewFile()) {
+			throw new IOException("Could not create " + srcMakefileFile);
 		}
-		FileWriter srcmakefileWriter = new FileWriter(srcmakefileFile);
-		srcmakefileWriter.append("blah blah\n");
-		srcmakefileWriter.append("blah blah again\n");
-		srcmakefileWriter.append("blah blah and again\n");
-		srcmakefileWriter.append("#DB += xxx.db\n");
-		srcmakefileWriter.append("blah blah and for the last time\n");
-		srcmakefileWriter.flush();
-		srcmakefileWriter.close();
+		FileWriter srcMakefileWriter = new FileWriter(srcMakefileFile);
+		srcMakefileWriter.append("blah blah\n");
+		srcMakefileWriter.append("blah blah again\n");
+		srcMakefileWriter.append("blah blah and again\n");
+		srcMakefileWriter.append("#DB += xxx.db\n");
+		srcMakefileWriter.append("blah blah and for the last time\n");
+		srcMakefileWriter.flush();
+		srcMakefileWriter.close();
+		
 		File releaseFile = new File(configDir + File.separator + "RELEASE");
 		if (!releaseFile.createNewFile()) {
 			throw new IOException("Could not create " + releaseFile);
