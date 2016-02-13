@@ -35,6 +35,7 @@ public class EpicsIOC {
 
 		fixDbMakefile();
 		
+		
 		writeDBFile();
 		
 		writeProtoFile();
@@ -108,10 +109,6 @@ public class EpicsIOC {
 		if (!dbDir.mkdirs()) {
 			throw new IOException("Could not create " + dbDir);
 		}
-		File srcDir = new File(iocTopDir + File.separator + iocNameString + "IOCApp/src/");
-		if (!srcDir.mkdirs()) {
-			throw new IOException("Could not create " + srcDir);
-		}
 		File makefileFile = new File(dbDir + File.separator + "Makefile");
 		if (!makefileFile.createNewFile()) {
 			throw new IOException("Could not create " + makefileFile);
@@ -128,6 +125,22 @@ public class EpicsIOC {
 		if (!configDir.mkdir()) {
 			throw new IOException("Could not create " + configDir);
 		}
+		File srcDir = new File(iocTopDir + File.separator + iocNameString + "IOCApp/src/");
+		if (!srcDir.mkdirs()) {
+			throw new IOException("Could not create " + srcDir);
+		}
+		File srcmakefileFile = new File(srcDir + File.separator + "Makefile");
+		if (!srcmakefileFile.createNewFile()) {
+			throw new IOException("Could not create " + srcmakefileFile);
+		}
+		FileWriter srcmakefileWriter = new FileWriter(srcmakefileFile);
+		srcmakefileWriter.append("blah blah\n");
+		srcmakefileWriter.append("blah blah again\n");
+		srcmakefileWriter.append("blah blah and again\n");
+		srcmakefileWriter.append("#DB += xxx.db\n");
+		srcmakefileWriter.append("blah blah and for the last time\n");
+		srcmakefileWriter.flush();
+		srcmakefileWriter.close();
 		File releaseFile = new File(configDir + File.separator + "RELEASE");
 		if (!releaseFile.createNewFile()) {
 			throw new IOException("Could not create " + releaseFile);
