@@ -34,7 +34,7 @@ public class EpicsIOC {
 		fixConfigureRelease();
 
 		fixDbMakefile();
-		
+		fixSrcMakefile();
 		
 		writeDBFile();
 		
@@ -50,6 +50,34 @@ public class EpicsIOC {
 			makefileStringBuilder.append(line+"\n");
 			if (line.equals("#DB += xxx.db")) {
 				makefileStringBuilder.append("DB += arduino.db\n");
+			}
+		}
+		makeFileReader.close();
+		System.out.println(makefileStringBuilder);
+		makefileFile.delete();
+		makefileFile.createNewFile();
+		FileWriter makefileWriter = new FileWriter(makefileFile);
+		makefileWriter.write(makefileStringBuilder.toString());
+		makefileWriter.flush();
+		makefileWriter.close();
+	}
+
+	private void fixSrcMakefile() throws FileNotFoundException, IOException {
+		StringBuilder makefileStringBuilder = new StringBuilder();
+		File makefileFile = new File(iocTopDir + File.separator + iocNameString + "IOCApp/src/Makefile");
+		BufferedReader makeFileReader = new BufferedReader(new FileReader(makefileFile));
+		String line;
+		while ((line = makeFileReader.readLine()) != null) {
+			makefileStringBuilder.append(line+"\n");
+			if (line.equals(iocNameString + "IOC_DBD += base.dbd")) {
+				makefileStringBuilder.append(iocNameString + "IOC_DBD += asyn.dbd\n");
+				makefileStringBuilder.append(iocNameString + "IOC_DBD += stream.dbd\n");
+				makefileStringBuilder.append(iocNameString + "IOC_DBD += drvAsynIPPort.dbd\n");
+				makefileStringBuilder.append(iocNameString + "IOC_DBD += drvAsynSerialPort.dbd\n");
+			}
+			if (line.contains(iocNameString + "IOC_LIBS")) {
+				makefileStringBuilder.append(iocNameString + "IOC_LIBS += asyn\n");
+				makefileStringBuilder.append(iocNameString + "IOC_LIBS += stream\n");
 			}
 		}
 		makeFileReader.close();
@@ -138,8 +166,9 @@ public class EpicsIOC {
 		FileWriter srcMakefileWriter = new FileWriter(srcMakefileFile);
 		srcMakefileWriter.append("blah blah\n");
 		srcMakefileWriter.append("blah blah again\n");
+		srcMakefileWriter.append(iocNameString + "IOC_DBD += base.dbd\n");
 		srcMakefileWriter.append("blah blah and again\n");
-		srcMakefileWriter.append("#DB += xxx.db\n");
+		srcMakefileWriter.append(iocNameString + "IOC_LIBS = blah\n");
 		srcMakefileWriter.append("blah blah and for the last time\n");
 		srcMakefileWriter.flush();
 		srcMakefileWriter.close();
