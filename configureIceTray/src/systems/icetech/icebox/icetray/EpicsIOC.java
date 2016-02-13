@@ -31,14 +31,13 @@ public class EpicsIOC {
 
 	public void makeIceIOC() throws IOException {
 		makeBasicIOC();
+		
 		fixConfigureRelease();
-
 		fixDbMakefile();
 		fixSrcMakefile();
 		fixStCmdFile();
 		
 		writeDBFile();
-		
 		writeProtoFile();
 	}
 
