@@ -35,10 +35,47 @@ public class EpicsIOC {
 
 		fixDbMakefile();
 		fixSrcMakefile();
+		fixStCmdFile();
 		
 		writeDBFile();
 		
 		writeProtoFile();
+	}
+
+	private void fixStCmdFile() throws FileNotFoundException, IOException {
+		String topSearch = "\\$\\(TOP\\)";
+		String iocSearch = "\\$\\(IOC\\)";
+		String topReplace = iocTopDir.toString();
+		String iocReplace = "ioc" + iocNameString + "IOC";
+		StringBuilder stcmdStringBuilder = new StringBuilder();
+		File stcmdFile = new File(iocTopDir + File.separator + "iocBoot/ioc" + iocNameString + "IOC" + File.separator + "st.cmd");
+		BufferedReader stcmdReader = new BufferedReader(new FileReader(stcmdFile));
+		String line;
+		while ((line=stcmdReader.readLine()) != null) {
+			line = line.replaceAll(topSearch, topReplace);
+			line = line.replaceAll(iocSearch, iocReplace);
+			stcmdStringBuilder.append(line+"\n");
+			if (line.equals("> envPaths")) {
+				stcmdStringBuilder.append("epicsEnvSet(STREAM_PROTOCOL_PATH,\"" + iocNameString + "IOCApp/Db\")\n");
+			}
+			if (line.equals(iocNameString + "IOC_registerRecordDeviceDriver pdbbase")) {
+				stcmdStringBuilder.append("drvAsynSerialPortConfigure(\"SERIALPORT\",\"/dev/ttyACM0\",0,0,0)\n");
+				stcmdStringBuilder.append("asynSetOption(\"SERIALPORT\",-1,\"baud\",\"115200\")\n");
+				stcmdStringBuilder.append("asynSetOption(\"SERIALPORT\",-1,\"bits\",\"8\")\n");
+				stcmdStringBuilder.append("asynSetOption(\"SERIALPORT\",-1,\"parity\",\"none\")\n");
+				stcmdStringBuilder.append("asynSetOption(\"SERIALPORT\",-1,\"stop\",\"1\")\n");
+				stcmdStringBuilder.append("asynSetOption(\"SERIALPORT\",-1,\"clocal\",\"Y\")\n");
+				stcmdStringBuilder.append("asynSetOption(\"SERIALPORT\",-1,\"crtscts\",\"N\")\n");
+				stcmdStringBuilder.append("dbLoadRecords(\"db/arduino.db\",\"PORT='SERIALPORT'\")\n");
+			}
+		}
+		stcmdReader.close();
+		stcmdFile.delete();
+		stcmdFile.createNewFile();
+		FileWriter stcmdWriter = new FileWriter(stcmdFile);
+		stcmdWriter.write(stcmdStringBuilder.toString());
+		stcmdWriter.flush();
+		stcmdWriter.close();
 	}
 
 	private void fixDbMakefile() throws FileNotFoundException, IOException {
@@ -53,7 +90,6 @@ public class EpicsIOC {
 			}
 		}
 		makeFileReader.close();
-		System.out.println(makefileStringBuilder);
 		makefileFile.delete();
 		makefileFile.createNewFile();
 		FileWriter makefileWriter = new FileWriter(makefileFile);
@@ -81,7 +117,6 @@ public class EpicsIOC {
 			}
 		}
 		makeFileReader.close();
-		System.out.println(makefileStringBuilder);
 		makefileFile.delete();
 		makefileFile.createNewFile();
 		FileWriter makefileWriter = new FileWriter(makefileFile);
@@ -177,6 +212,26 @@ public class EpicsIOC {
 		if (!releaseFile.createNewFile()) {
 			throw new IOException("Could not create " + releaseFile);
 		}
+		
+		File stcmdDir = new File(iocTopDir + File.separator + "iocBoot/ioc" + iocNameString + "IOC");
+		if (!stcmdDir.mkdirs()) {
+			throw new IOException("Could not create " + stcmdDir);
+		}
+		File stcmdFile = new File(stcmdDir + File.separator + "st.cmd");
+		if (!stcmdFile.createNewFile()) {
+			throw new IOException("Could not create " + stcmdFile);
+		}
+		FileWriter stcmdFileWriter = new FileWriter(stcmdFile);
+		stcmdFileWriter.append("blah blah\n");
+		stcmdFileWriter.append("> envPaths\n");
+		stcmdFileWriter.append("blah $(TOP) blah\n");
+		stcmdFileWriter.append("blah $(IOC) blah\n");
+		stcmdFileWriter.append("blah blah\n");
+		stcmdFileWriter.append(iocNameString + "IOC_registerRecordDeviceDriver pdbbase\n");
+		stcmdFileWriter.append("blah blah\n");
+		stcmdFileWriter.append("blah blah\n");
+		stcmdFileWriter.flush();
+		stcmdFileWriter.close();
 	}
 	
 	public static void main(String[] args) {
