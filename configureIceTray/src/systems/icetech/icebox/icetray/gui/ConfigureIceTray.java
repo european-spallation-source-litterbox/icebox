@@ -27,6 +27,8 @@ import java.awt.Color;
 import javax.swing.JScrollPane;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ConfigureIceTray {
 
@@ -86,7 +88,8 @@ public class ConfigureIceTray {
             for (int j = 0; j < subMenuText[i].length; j++)
             {
                 JMenuItem item = new JMenuItem(subMenuText[i][j]);
-                menu.add (item);
+                menu.add(item);
+                item.addActionListener(new IceTrayActionListener(menuText[i] + "." +subMenuText[i][j], this));
             }
         }
 		frame.setJMenuBar(menuBar);
@@ -175,4 +178,36 @@ public class ConfigureIceTray {
 		writeSigButtonPanel.add(btnCreateNewSignal, BorderLayout.SOUTH);
 	}
 
+	private static class IceTrayActionListener implements ActionListener {
+		ConfigureIceTray jFrameSkeleton;
+		String actionString = "";
+		IceTrayActionListener(String actionString, ConfigureIceTray jFrameSkeleton) {
+			this.actionString = actionString;
+			this.jFrameSkeleton = jFrameSkeleton;
+		}
+		
+		public void actionPerformed(ActionEvent arg0) {
+			if (actionString.equals("File.Open")) openFile();
+			if (actionString.equals("File.Save")) saveFile();
+			if (actionString.equals("File.Exit")) quitProgram();
+			if (actionString.equals("Help.About"))helpAbout();
+			if (actionString.equals("Help.Help")) helpHelp();
+		}
+		private void openFile() {
+			// TODO Auto-generated method stub
+		}
+		private void saveFile() {
+			// TODO Auto-generated method stub
+		}
+		protected void quitProgram() {
+			System.exit(0);
+		}
+		private void helpAbout() {
+			// TODO Auto-generated method stub
+		}
+		private void helpHelp() {
+			// TODO Auto-generated method stub
+		}
+		
+	}
 }
