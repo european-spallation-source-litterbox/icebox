@@ -6,7 +6,9 @@ import javax.swing.JFrame;
 
 import java.awt.BorderLayout;
 
+import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JTextField;
 import javax.swing.JPanel;
 import javax.swing.JButton;
@@ -21,9 +23,9 @@ import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
 
 import java.awt.Color;
-import java.awt.Dimension;
 
 import javax.swing.JScrollPane;
+
 import java.awt.Font;
 
 public class ConfigureIceTray {
@@ -34,7 +36,6 @@ public class ConfigureIceTray {
 	private JLabel lblReadSigs_1,lblWriteSigs_1;
 	private JList<String>writeSigList;
 	private JButton btnDeleteSelected,btnCreateNewSignal;
-	private JScrollPane scrollPane;
 	private JList<String> readSigList;
 
 	/**
@@ -70,6 +71,24 @@ public class ConfigureIceTray {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JMenuBar menuBar = new JMenuBar();
+		String menuText[] = {"File", "Help"};
+        String subMenuText[][] =
+        {
+    		{"Open","Save","Exit"},
+    		{"Help", "About"}
+    	};
+
+        for (int i = 0; i < menuText.length; i++)
+        {
+            JMenu menu = new JMenu(menuText[i]);
+            menuBar.add (menu);
+            
+            for (int j = 0; j < subMenuText[i].length; j++)
+            {
+                JMenuItem item = new JMenuItem(subMenuText[i][j]);
+                menu.add (item);
+            }
+        }
 		frame.setJMenuBar(menuBar);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		
@@ -120,9 +139,6 @@ public class ConfigureIceTray {
 		
 		btnCreateNewSignal = new JButton("Create New Signal");
 		readSigButtonPanel.add(btnCreateNewSignal, BorderLayout.SOUTH);
-		
-		scrollPane = new JScrollPane();
-		readSigButtonPanel.add(scrollPane, BorderLayout.CENTER);
 		
 		writeSigPanel = new JPanel();
 		primaryPanel.add(writeSigPanel);
