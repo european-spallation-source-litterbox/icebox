@@ -72,28 +72,7 @@ public class ConfigureIceTray {
 		frame.setBounds(100, 100, 331, 310);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JMenuBar menuBar = new JMenuBar();
-		String menuText[] = {"File", "Help"};
-        String subMenuText[][] =
-        {
-    		{"Open","Save","Exit"},
-    		{"Help", "About"}
-    	};
-
-        for (int i = 0; i < menuText.length; i++)
-        {
-            JMenu menu = new JMenu(menuText[i]);
-            menuBar.add (menu);
-            
-            for (int j = 0; j < subMenuText[i].length; j++)
-            {
-                JMenuItem item = new JMenuItem(subMenuText[i][j]);
-                menu.add(item);
-                item.addActionListener(new IceTrayActionListener(menuText[i] + "." +subMenuText[i][j], this));
-            }
-        }
-		frame.setJMenuBar(menuBar);
-		frame.getContentPane().setLayout(new BorderLayout(0, 0));
+		makeMenuBar();
 		
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(panel, BorderLayout.NORTH);
@@ -176,6 +155,31 @@ public class ConfigureIceTray {
 		
 		btnCreateNewSignal = new JButton("Create New Signal");
 		writeSigButtonPanel.add(btnCreateNewSignal, BorderLayout.SOUTH);
+	}
+
+	private void makeMenuBar() {
+		JMenuBar menuBar = new JMenuBar();
+		String menuText[] = {"File", "Help"};
+        String subMenuText[][] =
+        {
+    		{"Open","Save","Exit"},
+    		{"Help", "About"}
+    	};
+
+        for (int i = 0; i < menuText.length; i++)
+        {
+            JMenu menu = new JMenu(menuText[i]);
+            menuBar.add (menu);
+            
+            for (int j = 0; j < subMenuText[i].length; j++)
+            {
+                JMenuItem item = new JMenuItem(subMenuText[i][j]);
+                menu.add(item);
+                item.addActionListener(new IceTrayActionListener(menuText[i] + "." +subMenuText[i][j], this));
+            }
+        }
+		frame.setJMenuBar(menuBar);
+		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 	}
 
 	private static class IceTrayActionListener implements ActionListener {
