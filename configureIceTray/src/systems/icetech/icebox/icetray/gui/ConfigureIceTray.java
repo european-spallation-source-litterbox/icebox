@@ -184,19 +184,19 @@ public class ConfigureIceTray {
 	}
 
 	private static class IceTrayActionListener implements ActionListener {
-		ConfigureIceTray jFrameSkeleton;
+		ConfigureIceTray iceTrayConfigurizer;
 		String actionString = "";
 		IceTrayActionListener(String actionString, ConfigureIceTray jFrameSkeleton) {
 			this.actionString = actionString;
-			this.jFrameSkeleton = jFrameSkeleton;
+			this.iceTrayConfigurizer = jFrameSkeleton;
 		}
 		
 		public void actionPerformed(ActionEvent arg0) {
-			if (actionString.equals("File.Open")) jFrameSkeleton.openFile();
-			if (actionString.equals("File.Save")) jFrameSkeleton.saveFile();
-			if (actionString.equals("File.Exit")) jFrameSkeleton.quitProgram();
-			if (actionString.equals("Help.About"))jFrameSkeleton.helpAbout();
-			if (actionString.equals("Help.Help")) jFrameSkeleton.helpHelp();
+			if (actionString.equals("File.Open")) iceTrayConfigurizer.openFile();
+			if (actionString.equals("File.Save")) iceTrayConfigurizer.saveFile();
+			if (actionString.equals("File.Exit")) iceTrayConfigurizer.quitProgram();
+			if (actionString.equals("Help.About"))iceTrayConfigurizer.helpAbout();
+			if (actionString.equals("Help.Help")) iceTrayConfigurizer.helpHelp();
 		}
 	}
 	private void openFile() {
