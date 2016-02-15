@@ -89,6 +89,7 @@ public class ConfigureIceTray {
 		frame.getContentPane().add(primaryPanel, BorderLayout.CENTER);
 		primaryPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
+		//Could maybe subclass JPanel to make readSigPanel
 		readSigPanel = new JPanel();
 		primaryPanel.add(readSigPanel);
 		readSigPanel.setLayout(new BorderLayout(0, 0));
