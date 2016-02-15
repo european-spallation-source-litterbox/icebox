@@ -36,9 +36,8 @@ public class ConfigureIceTray {
 	private JTextField txtNameOfIcetray;
 	private JPanel primaryPanel,readSigPanel,writeSigPanel,readSigButtonPanel,writeSigButtonPanel;
 	private JLabel lblReadSigs_1,lblWriteSigs_1;
-	private JList<String>writeSigList;
-	private JButton btnDeleteSelected,btnCreateNewSignal;
-	private JList<String> readSigList;
+	private JList<String> writeSigList,readSigList;
+	private JButton btnDeleteSelRead,btnCreateNewRSignal,btnDeleteSelWrite,btnCreateNewWSignal;
 
 	/**
 	 * Launch the application.
@@ -116,11 +115,11 @@ public class ConfigureIceTray {
 		readSigPanel.add(readSigButtonPanel, BorderLayout.SOUTH);
 		readSigButtonPanel.setLayout(new BorderLayout(0, 0));
 		
-		btnDeleteSelected = new JButton("Delete Selected");
-		readSigButtonPanel.add(btnDeleteSelected, BorderLayout.NORTH);
+		btnDeleteSelRead = new JButton("Delete Selected");
+		readSigButtonPanel.add(btnDeleteSelRead, BorderLayout.NORTH);
 		
-		btnCreateNewSignal = new JButton("Create New Signal");
-		readSigButtonPanel.add(btnCreateNewSignal, BorderLayout.SOUTH);
+		btnCreateNewRSignal= new JButton("Create New Signal");
+		readSigButtonPanel.add(btnCreateNewRSignal, BorderLayout.SOUTH);
 		
 		writeSigPanel = new JPanel();
 		primaryPanel.add(writeSigPanel);
@@ -150,11 +149,11 @@ public class ConfigureIceTray {
 		writeSigPanel.add(writeSigButtonPanel, BorderLayout.SOUTH);
 		writeSigButtonPanel.setLayout(new BorderLayout(0, 0));
 		
-		btnDeleteSelected = new JButton("Delete Selected");
-		writeSigButtonPanel.add(btnDeleteSelected, BorderLayout.NORTH);
+		btnDeleteSelWrite = new JButton("Delete Selected");
+		writeSigButtonPanel.add(btnDeleteSelWrite, BorderLayout.NORTH);
 		
-		btnCreateNewSignal = new JButton("Create New Signal");
-		writeSigButtonPanel.add(btnCreateNewSignal, BorderLayout.SOUTH);
+		btnCreateNewWSignal = new JButton("Create New Signal");
+		writeSigButtonPanel.add(btnCreateNewWSignal, BorderLayout.SOUTH);
 	}
 
 	private void makeMenuBar() {
