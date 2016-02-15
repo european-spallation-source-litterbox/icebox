@@ -186,9 +186,9 @@ public class ConfigureIceTray {
 	private static class IceTrayActionListener implements ActionListener {
 		ConfigureIceTray iceTrayConfigurizer;
 		String actionString = "";
-		IceTrayActionListener(String actionString, ConfigureIceTray jFrameSkeleton) {
+		IceTrayActionListener(String actionString, ConfigureIceTray configureIceTray) {
 			this.actionString = actionString;
-			this.iceTrayConfigurizer = jFrameSkeleton;
+			this.iceTrayConfigurizer = configureIceTray;
 		}
 		
 		public void actionPerformed(ActionEvent arg0) {
