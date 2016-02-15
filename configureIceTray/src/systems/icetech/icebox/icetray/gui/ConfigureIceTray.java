@@ -34,9 +34,9 @@ import java.awt.event.ActionListener;
 public class ConfigureIceTray {
 
 	private JFrame frame;
-	private JTextField txtNameOfIcetray;
+	private JTextField txtIceTrayName;
 	private JPanel primaryPanel,readSigPanel,writeSigPanel,readSigButtonPanel,writeSigButtonPanel;
-	private JLabel lblReadSigs_1,lblWriteSigs_1;
+	private JLabel lblReadSigs,lblWriteSigs;
 	private JList<String> writeSigList,readSigList;
 	private JButton btnDeleteSelRead,btnCreateNewRSignal,btnDeleteSelWrite,btnCreateNewWSignal;
 	private String helpAboutString = "Ice-Tray configuriser.\nFeb 2016";
@@ -79,11 +79,11 @@ public class ConfigureIceTray {
 		frame.getContentPane().add(panel, BorderLayout.NORTH);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 		
-		txtNameOfIcetray = new JTextField();
-		txtNameOfIcetray.setHorizontalAlignment(SwingConstants.CENTER);
-		txtNameOfIcetray.setText("Name of Ice-Tray...");
-		panel.add(txtNameOfIcetray);
-		txtNameOfIcetray.setColumns(10);
+		txtIceTrayName = new JTextField();
+		txtIceTrayName.setHorizontalAlignment(SwingConstants.CENTER);
+		txtIceTrayName.setText("Name of Ice-Tray...");
+		panel.add(txtIceTrayName);
+		txtIceTrayName.setColumns(10);
 		
 		primaryPanel = new JPanel();
 		frame.getContentPane().add(primaryPanel, BorderLayout.CENTER);
@@ -93,10 +93,10 @@ public class ConfigureIceTray {
 		primaryPanel.add(readSigPanel);
 		readSigPanel.setLayout(new BorderLayout(0, 0));
 		
-		lblReadSigs_1 = new JLabel("Read Sigs");
-		lblReadSigs_1.setFont(new Font("Lucida Grande", Font.BOLD, 15));
-		lblReadSigs_1.setHorizontalAlignment(SwingConstants.CENTER);
-		readSigPanel.add(lblReadSigs_1, BorderLayout.NORTH);
+		lblReadSigs = new JLabel("Read Sigs");
+		lblReadSigs.setFont(new Font("Lucida Grande", Font.BOLD, 15));
+		lblReadSigs.setHorizontalAlignment(SwingConstants.CENTER);
+		readSigPanel.add(lblReadSigs, BorderLayout.NORTH);
 		
 		readSigList = new JList<String>();
 		readSigList.setBorder(new LineBorder(new Color(0, 0, 0), 4, true));
@@ -127,10 +127,10 @@ public class ConfigureIceTray {
 		primaryPanel.add(writeSigPanel);
 		writeSigPanel.setLayout(new BorderLayout(0, 0));
 		
-		lblWriteSigs_1 = new JLabel("Write Sigs");
-		lblWriteSigs_1.setFont(new Font("Lucida Grande", Font.BOLD, 15));
-		lblWriteSigs_1.setHorizontalAlignment(SwingConstants.CENTER);
-		writeSigPanel.add(lblWriteSigs_1, BorderLayout.NORTH);
+		lblWriteSigs = new JLabel("Write Sigs");
+		lblWriteSigs.setFont(new Font("Lucida Grande", Font.BOLD, 15));
+		lblWriteSigs.setHorizontalAlignment(SwingConstants.CENTER);
+		writeSigPanel.add(lblWriteSigs, BorderLayout.NORTH);
 		
 		writeSigList = new JList<String>();
 		writeSigList.setBorder(new LineBorder(new Color(0, 0, 0), 4, true));
