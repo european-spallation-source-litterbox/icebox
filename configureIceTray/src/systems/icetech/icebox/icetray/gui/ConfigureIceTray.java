@@ -9,6 +9,7 @@ import java.awt.BorderLayout;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPanel;
 import javax.swing.JButton;
@@ -38,6 +39,7 @@ public class ConfigureIceTray {
 	private JLabel lblReadSigs_1,lblWriteSigs_1;
 	private JList<String> writeSigList,readSigList;
 	private JButton btnDeleteSelRead,btnCreateNewRSignal,btnDeleteSelWrite,btnCreateNewWSignal;
+	private String helpAboutString = "Ice-Tray configuriser.\nFeb 2016";
 
 	/**
 	 * Launch the application.
@@ -190,27 +192,26 @@ public class ConfigureIceTray {
 		}
 		
 		public void actionPerformed(ActionEvent arg0) {
-			if (actionString.equals("File.Open")) openFile();
-			if (actionString.equals("File.Save")) saveFile();
-			if (actionString.equals("File.Exit")) quitProgram();
-			if (actionString.equals("Help.About"))helpAbout();
-			if (actionString.equals("Help.Help")) helpHelp();
+			if (actionString.equals("File.Open")) jFrameSkeleton.openFile();
+			if (actionString.equals("File.Save")) jFrameSkeleton.saveFile();
+			if (actionString.equals("File.Exit")) jFrameSkeleton.quitProgram();
+			if (actionString.equals("Help.About"))jFrameSkeleton.helpAbout();
+			if (actionString.equals("Help.Help")) jFrameSkeleton.helpHelp();
 		}
-		private void openFile() {
-			// TODO Auto-generated method stub
-		}
-		private void saveFile() {
-			// TODO Auto-generated method stub
-		}
-		protected void quitProgram() {
-			System.exit(0);
-		}
-		private void helpAbout() {
-			// TODO Auto-generated method stub
-		}
-		private void helpHelp() {
-			// TODO Auto-generated method stub
-		}
-		
+	}
+	private void openFile() {
+		// TODO Auto-generated method stub
+	}
+	private void saveFile() {
+		// TODO Auto-generated method stub
+	}
+	protected void quitProgram() {
+		System.exit(0);
+	}
+	private void helpAbout() {
+		JOptionPane.showMessageDialog(frame, helpAboutString);
+	}
+	private void helpHelp() {
+		JOptionPane.showMessageDialog(frame, "You're beyond help.");
 	}
 }
