@@ -3,6 +3,8 @@ package systems.icetech.icebox.icetray.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.AbstractListModel;
 import javax.swing.DefaultListModel;
@@ -13,6 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
+
+import org.omg.CORBA.PUBLIC_MEMBER;
 
 public abstract class SignalConfiguratorPanel extends JPanel {
 
@@ -36,16 +40,6 @@ public abstract class SignalConfiguratorPanel extends JPanel {
 		sigList.setBorder(new LineBorder(new Color(0, 0, 0), 4, true));
 		model = new DefaultListModel<String>();
 		sigList.setModel(model);
-		/*sigList.setModel(new AbstractListModel<String>() {
-			private static final long serialVersionUID = 1438563442699558208L;
-			String[] values = new String[] {"A1", "A2", "A3"};
-			public int getSize() {
-				return values.length;
-			}
-			public String getElementAt(int index) {
-				return values[index];
-			}
-		});*/
 		JScrollPane readSigScrollPane = new JScrollPane(sigList);
 		add(readSigScrollPane, BorderLayout.CENTER);
 		
@@ -58,7 +52,16 @@ public abstract class SignalConfiguratorPanel extends JPanel {
 		
 		btnCreateNewSignal= new JButton("Create New Signal");
 		sigButtonPanel.add(btnCreateNewSignal, BorderLayout.SOUTH);
+		btnCreateNewSignal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				model.addElement("Button Clicked!");
+			}
+		});
 	}
 
 	protected abstract String buttonText();
+	
+	public void actionPerformed(ActionEvent e){
+		model.addElement("Button Clicked!");
+	}
 }
