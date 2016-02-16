@@ -89,7 +89,9 @@ public class ConfigureIceTray {
 		frame.getContentPane().add(primaryPanel, BorderLayout.CENTER);
 		primaryPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		//Could maybe subclass JPanel to make readSigPanel
+		readSigPanel = new ReadSigConfigPanel();
+		primaryPanel.add(readSigPanel);
+		/*//Could maybe subclass JPanel to make readSigPanel
 		readSigPanel = new JPanel();
 		primaryPanel.add(readSigPanel);
 		readSigPanel.setLayout(new BorderLayout(0, 0));
@@ -122,9 +124,12 @@ public class ConfigureIceTray {
 		readSigButtonPanel.add(btnDeleteSelRead, BorderLayout.NORTH);
 		
 		btnCreateNewRSignal= new JButton("Create New Signal");
-		readSigButtonPanel.add(btnCreateNewRSignal, BorderLayout.SOUTH);
+		readSigButtonPanel.add(btnCreateNewRSignal, BorderLayout.SOUTH);*/
 		
-		writeSigPanel = new JPanel();
+		writeSigPanel = new WriteSigConfigPanel();
+		primaryPanel.add(writeSigPanel);
+		
+		/*writeSigPanel = new JPanel();
 		primaryPanel.add(writeSigPanel);
 		writeSigPanel.setLayout(new BorderLayout(0, 0));
 		
@@ -156,7 +161,7 @@ public class ConfigureIceTray {
 		writeSigButtonPanel.add(btnDeleteSelWrite, BorderLayout.NORTH);
 		
 		btnCreateNewWSignal = new JButton("Create New Signal");
-		writeSigButtonPanel.add(btnCreateNewWSignal, BorderLayout.SOUTH);
+		writeSigButtonPanel.add(btnCreateNewWSignal, BorderLayout.SOUTH);*/
 	}
 
 	private void makeMenuBar() {
