@@ -12,6 +12,12 @@ public class WriteSignal extends Signal {
 		setPvName(getName() + ":set");
 		setRecordType("ao");
 	}
+	
+	public WriteSignal(String nameInput) {
+		super(nameInput);
+		setPvName(getName() + ":set");
+		setRecordType("ao");
+	}
 
 	@Override
 	public String WriteEPICSRecord(String fileName) {

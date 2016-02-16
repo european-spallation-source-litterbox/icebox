@@ -10,6 +10,10 @@ public abstract class Signal {
 		setName(jsonInput.getString("name"));
 	}
 	
+	public Signal(String nameInput) {
+		setName(nameInput);
+	}
+	
 	protected String epicsDBFieldString(String key, String value) {
 		String outString = "field(";
 		outString += key;

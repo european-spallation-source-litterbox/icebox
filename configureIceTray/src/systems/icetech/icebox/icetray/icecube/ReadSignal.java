@@ -15,6 +15,13 @@ public class ReadSignal extends Signal {
 		setPvName(getName() + ":get");
 		setRecordType("ai");
 	}
+	
+	public ReadSignal(String nameInput, String scanRateString) {
+		super(nameInput);
+		setScanRate(scanRateString);
+		setPvName(getName() + ":get");
+		setRecordType("ai");
+	}
 
 	@Override
 	public String WriteEPICSRecord(String fileName) {
