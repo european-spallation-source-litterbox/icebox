@@ -12,22 +12,11 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPanel;
-import javax.swing.JButton;
 import javax.swing.SwingConstants;
-import javax.swing.JList;
-import javax.swing.AbstractListModel;
 import javax.swing.BoxLayout;
 
 import java.awt.FlowLayout;
 
-import javax.swing.JLabel;
-import javax.swing.border.LineBorder;
-
-import java.awt.Color;
-
-import javax.swing.JScrollPane;
-
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -35,10 +24,9 @@ public class ConfigureIceTray {
 
 	private JFrame frame;
 	private JTextField txtIceTrayName;
-	private JPanel primaryPanel,readSigPanel,writeSigPanel,readSigButtonPanel,writeSigButtonPanel;
-	private JLabel lblReadSigs,lblWriteSigs;
-	private JList<String> writeSigList,readSigList;
-	private JButton btnDeleteSelRead,btnCreateNewRSignal,btnDeleteSelWrite,btnCreateNewWSignal;
+	private JPanel primaryPanel;
+	private ReadSigConfigPanel readSigPanel;
+	private WriteSigConfigPanel writeSigPanel;
 	private String helpAboutString = "Ice-Tray configuriser.\nFeb 2016";
 
 	/**
