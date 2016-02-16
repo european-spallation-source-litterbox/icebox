@@ -91,77 +91,9 @@ public class ConfigureIceTray {
 		
 		readSigPanel = new ReadSigConfigPanel();
 		primaryPanel.add(readSigPanel);
-		/*//Could maybe subclass JPanel to make readSigPanel
-		readSigPanel = new JPanel();
-		primaryPanel.add(readSigPanel);
-		readSigPanel.setLayout(new BorderLayout(0, 0));
-		
-		lblReadSigs = new JLabel("Read Sigs");
-		lblReadSigs.setFont(new Font("Lucida Grande", Font.BOLD, 15));
-		lblReadSigs.setHorizontalAlignment(SwingConstants.CENTER);
-		readSigPanel.add(lblReadSigs, BorderLayout.NORTH);
-		
-		readSigList = new JList<String>();
-		readSigList.setBorder(new LineBorder(new Color(0, 0, 0), 4, true));
-		readSigList.setModel(new AbstractListModel<String>() {
-			private static final long serialVersionUID = 1438563442699558208L;
-			String[] values = new String[] {"Arse1", "Arse2", "Arse3"};
-			public int getSize() {
-				return values.length;
-			}
-			public String getElementAt(int index) {
-				return values[index];
-			}
-		});
-		JScrollPane readSigScrollPane = new JScrollPane(readSigList);
-		readSigPanel.add(readSigScrollPane, BorderLayout.CENTER);
-		
-		readSigButtonPanel = new JPanel();
-		readSigPanel.add(readSigButtonPanel, BorderLayout.SOUTH);
-		readSigButtonPanel.setLayout(new BorderLayout(0, 0));
-		
-		btnDeleteSelRead = new JButton("Delete Selected");
-		readSigButtonPanel.add(btnDeleteSelRead, BorderLayout.NORTH);
-		
-		btnCreateNewRSignal= new JButton("Create New Signal");
-		readSigButtonPanel.add(btnCreateNewRSignal, BorderLayout.SOUTH);*/
 		
 		writeSigPanel = new WriteSigConfigPanel();
 		primaryPanel.add(writeSigPanel);
-		
-		/*writeSigPanel = new JPanel();
-		primaryPanel.add(writeSigPanel);
-		writeSigPanel.setLayout(new BorderLayout(0, 0));
-		
-		lblWriteSigs = new JLabel("Write Sigs");
-		lblWriteSigs.setFont(new Font("Lucida Grande", Font.BOLD, 15));
-		lblWriteSigs.setHorizontalAlignment(SwingConstants.CENTER);
-		writeSigPanel.add(lblWriteSigs, BorderLayout.NORTH);
-		
-		writeSigList = new JList<String>();
-		writeSigList.setBorder(new LineBorder(new Color(0, 0, 0), 4, true));
-		writeSigList.setModel(new AbstractListModel<String>() {
-			private static final long serialVersionUID = 1438563442699558208L;
-			String[] values = new String[] {"Blah1", "Blah2", "Blah3"};
-			public int getSize() {
-				return values.length;
-			}
-			public String getElementAt(int index) {
-				return values[index];
-			}
-		});
-		JScrollPane writeSigScrollPane = new JScrollPane(writeSigList);
-		writeSigPanel.add(writeSigScrollPane, BorderLayout.CENTER);
-		
-		writeSigButtonPanel = new JPanel();
-		writeSigPanel.add(writeSigButtonPanel, BorderLayout.SOUTH);
-		writeSigButtonPanel.setLayout(new BorderLayout(0, 0));
-		
-		btnDeleteSelWrite = new JButton("Delete Selected");
-		writeSigButtonPanel.add(btnDeleteSelWrite, BorderLayout.NORTH);
-		
-		btnCreateNewWSignal = new JButton("Create New Signal");
-		writeSigButtonPanel.add(btnCreateNewWSignal, BorderLayout.SOUTH);*/
 	}
 
 	private void makeMenuBar() {
