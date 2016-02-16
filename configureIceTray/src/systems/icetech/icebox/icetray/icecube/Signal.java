@@ -34,8 +34,9 @@ public abstract class Signal {
 	}
 	
 	public String toString() {
-		String rwString = isRead() ? "read" : "write";
-		return "Signal:  (" + rwString + ") " + getName();
+		//String rwString = isRead() ? "read" : "write";
+		//return "Signal:  (" + rwString + ") " + getName();
+		return getName();
 	}
 
 	public String getName() {
