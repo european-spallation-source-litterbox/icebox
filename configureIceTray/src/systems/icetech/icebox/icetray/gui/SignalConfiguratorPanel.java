@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.AbstractListModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -21,6 +22,7 @@ public abstract class SignalConfiguratorPanel extends JPanel {
 	public JList<String> sigList;
 	public JButton btnDeleteSel;
 	public JButton btnCreateNewSignal;
+	public DefaultListModel<String> model;
 
 	public SignalConfiguratorPanel() {
 		setLayout(new BorderLayout(0, 0));
@@ -32,7 +34,9 @@ public abstract class SignalConfiguratorPanel extends JPanel {
 		
 		sigList = new JList<String>();
 		sigList.setBorder(new LineBorder(new Color(0, 0, 0), 4, true));
-		sigList.setModel(new AbstractListModel<String>() {
+		model = new DefaultListModel<String>();
+		sigList.setModel(model);
+		/*sigList.setModel(new AbstractListModel<String>() {
 			private static final long serialVersionUID = 1438563442699558208L;
 			String[] values = new String[] {"A1", "A2", "A3"};
 			public int getSize() {
@@ -41,7 +45,7 @@ public abstract class SignalConfiguratorPanel extends JPanel {
 			public String getElementAt(int index) {
 				return values[index];
 			}
-		});
+		});*/
 		JScrollPane readSigScrollPane = new JScrollPane(sigList);
 		add(readSigScrollPane, BorderLayout.CENTER);
 		
