@@ -23,7 +23,6 @@ public abstract class SignalConfiguratorPanel extends JPanel {
 	public JButton btnCreateNewSignal;
 
 	public SignalConfiguratorPanel() {
-		System.out.println("Testing");
 		setLayout(new BorderLayout(0, 0));
 		
 		lblSigs = new JLabel(buttonText());
