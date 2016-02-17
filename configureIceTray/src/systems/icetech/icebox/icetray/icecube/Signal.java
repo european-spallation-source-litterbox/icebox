@@ -4,14 +4,14 @@ import javax.json.JsonObject;
 
 public abstract class Signal {
 
-	private String name;
+	private final String name;
 
 	public Signal(JsonObject jsonInput) {
-		setName(jsonInput.getString("name"));
+		this.name = jsonInput.getString("name");
 	}
 	
 	public Signal(String nameInput) {
-		setName(nameInput);
+		this.name = nameInput;
 	}
 	
 	protected String epicsDBFieldString(String key, String value) {
@@ -42,9 +42,5 @@ public abstract class Signal {
 	public String getName() {
 		return name;
 	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
+	
 }
