@@ -16,6 +16,7 @@ public class WriteSigConfigPanel extends SignalConfiguratorPanel {
 		super();
 		delBtnListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				model.remove(sigList.getSelectedIndex());
 			}
 		};
 		createBtnListener = new ActionListener() {
