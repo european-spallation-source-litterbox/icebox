@@ -16,12 +16,10 @@ public class ReadSigConfigPanel extends SignalConfiguratorPanel {
 		super();
 		delBtnListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//model.addElement("Delete-read-button pressed!");
 			}
 		};
 		createBtnListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//model.addElement("Create-read-button pressed!");
 				model.addElement(new ReadSignal("sigRead" + ++counterInt));
 			}
 		};

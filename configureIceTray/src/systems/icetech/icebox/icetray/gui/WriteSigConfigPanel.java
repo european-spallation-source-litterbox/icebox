@@ -16,12 +16,10 @@ public class WriteSigConfigPanel extends SignalConfiguratorPanel {
 		super();
 		delBtnListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//model.addElement("Delete-write-button pressed!");
 			}
 		};
 		createBtnListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//model.addElement("Create-write-button pressed!");
 				model.addElement(new WriteSignal("sigWrite" + ++counterInt));
 			}
 		};
