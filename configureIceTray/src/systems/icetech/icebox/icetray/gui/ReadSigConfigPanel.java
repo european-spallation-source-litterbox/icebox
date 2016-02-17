@@ -22,7 +22,7 @@ public class ReadSigConfigPanel extends SignalConfiguratorPanel {
 		createBtnListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//model.addElement("Create-read-button pressed!");
-				model.addElement(new ReadSignal("sigRead" + ++counterInt, "0.1 second"));
+				model.addElement(new ReadSignal("sigRead" + ++counterInt));
 			}
 		};
 		btnDeleteSel.addActionListener(delBtnListener);
