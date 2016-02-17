@@ -1,22 +1,31 @@
 package systems.icetech.icebox.icetray.icecube;
 
+import javax.json.Json;
+import javax.json.JsonBuilderFactory;
 import javax.json.JsonObject;
 
 public class WriteSignal extends Signal {
 
-	private String pvName;
-	private String recordType;
+	private final String pvName;
+	private final String recordType = "ao";
+	private JsonObject jsonRep;
 
 	public WriteSignal(JsonObject jsonInput) {
 		super(jsonInput);
-		setPvName(getName() + ":set");
-		setRecordType("ao");
+		this.pvName = getName() + ":set";
+		
+		buildJsonRep();
 	}
 	
 	public WriteSignal(String nameInput) {
 		super(nameInput);
-		setPvName(getName() + ":set");
-		setRecordType("ao");
+		this.pvName = getName() + ":set";
+		
+		buildJsonRep();
+	}
+	
+	public JsonObject getJsonRep() {
+		return jsonRep;
 	}
 
 	@Override
@@ -38,6 +47,15 @@ public class WriteSignal extends Signal {
 	}
 	
 	@Override
+	protected void buildJsonRep() {
+		JsonBuilderFactory factory = Json.createBuilderFactory(null);
+		jsonRep = factory.createObjectBuilder()
+			     .add("name", getName())
+			     .add("RW", "W")
+			     .build();
+	}
+	
+	@Override
 	public boolean isRead() {
 		return false;
 	}
@@ -46,16 +64,8 @@ public class WriteSignal extends Signal {
 		return pvName;
 	}
 
-	private void setPvName(String pvName) {
-		this.pvName = pvName;
-	}
-
 	public String getRecordType() {
 		return recordType;
-	}
-
-	private void setRecordType(String recordType) {
-		this.recordType = recordType;
 	}
 
 }

@@ -1,30 +1,39 @@
 package systems.icetech.icebox.icetray.icecube;
 
+import javax.json.Json;
+import javax.json.JsonBuilderFactory;
 import javax.json.JsonObject;
 
 public class ReadSignal extends Signal {
 	
-	private String scanRate;
-	private String pvName;
-	private String recordType = "ai";
+	private final String scanRate;
+	private final String pvName;
+	private final String recordType = "ai";
+	private JsonObject jsonRep;
 
 	public ReadSignal(JsonObject jsonInput) {
 		super(jsonInput);
 
-		setScanRate(jsonInput.getString("scanRate"));
-		setPvName(getName() + ":get");
-		setRecordType("ai");
+		this.scanRate = jsonInput.getString("scanRate");
+		this.pvName = getName() + ":get";
+		
+		buildJsonRep();
 	}
 	
 	public ReadSignal(String nameInput, String scanRateString) {
 		super(nameInput);
-		setScanRate(scanRateString);
-		setPvName(getName() + ":get");
-		setRecordType("ai");
+		this.scanRate = scanRateString;
+		this.pvName = getName() + ":get";
+		
+		buildJsonRep();
 	}
 	
 	public ReadSignal(String nameInput) {
 		this(nameInput, ".1 second");
+	}
+	
+	public JsonObject getJsonRep() {
+		return jsonRep;
 	}
 
 	@Override
@@ -48,16 +57,22 @@ public class ReadSignal extends Signal {
 	}
 	
 	@Override
+	protected void buildJsonRep() {
+		JsonBuilderFactory factory = Json.createBuilderFactory(null);
+		jsonRep = factory.createObjectBuilder()
+			     .add("name", getName())
+			     .add("RW", "R")
+			     .add("scanRate", getScanRate())
+			     .build();
+	}
+	
+	@Override
 	public boolean isRead() {
 		return true;
 	}
 
 	public String getScanRate() {
 		return scanRate;
-	}
-
-	public void setScanRate(String scanRate) {
-		this.scanRate = scanRate;
 	}
 	
 	public String getPVName() {
@@ -68,16 +83,8 @@ public class ReadSignal extends Signal {
 		return recordType;
 	}
 
-	private void setRecordType(String recordType) {
-		this.recordType = recordType;
-	}
-
 	public String getPvName() {
 		return pvName;
-	}
-
-	private void setPvName(String pvName) {
-		this.pvName = pvName;
 	}
 
 }

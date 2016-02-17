@@ -26,6 +26,10 @@ public abstract class Signal {
 	public abstract String WriteEPICSRecord(String fileName);
 	
 	public abstract String WriteEPICSProtoFunc(char sig);
+	
+	protected abstract void buildJsonRep();
+	
+	public abstract JsonObject getJsonRep();
 
 	public abstract boolean isRead();
 	
