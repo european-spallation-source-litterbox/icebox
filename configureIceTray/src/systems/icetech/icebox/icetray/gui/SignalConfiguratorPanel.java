@@ -13,16 +13,18 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
+import systems.icetech.icebox.icetray.icecube.Signal;
+
 public abstract class SignalConfiguratorPanel extends JPanel {
 
 	private static final long serialVersionUID = -9104767885807126408L;
 	private JLabel lblSigs;
 	private JPanel sigButtonPanel;
 	
-	public JList<String> sigList;
+	public JList<Signal> sigList;
 	protected JButton btnDeleteSel;
 	protected JButton btnCreateNewSignal;
-	public DefaultListModel<String> model;
+	public DefaultListModel<Signal> model;
 
 	public SignalConfiguratorPanel() {
 		setLayout(new BorderLayout(0, 0));
@@ -32,9 +34,9 @@ public abstract class SignalConfiguratorPanel extends JPanel {
 		lblSigs.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblSigs, BorderLayout.NORTH);
 		
-		sigList = new JList<String>();
+		sigList = new JList<Signal>();
 		sigList.setBorder(new LineBorder(new Color(0, 0, 0), 4, true));
-		model = new DefaultListModel<String>();
+		model = new DefaultListModel<Signal>();
 		sigList.setModel(model);
 		JScrollPane readSigScrollPane = new JScrollPane(sigList);
 		add(readSigScrollPane, BorderLayout.CENTER);
