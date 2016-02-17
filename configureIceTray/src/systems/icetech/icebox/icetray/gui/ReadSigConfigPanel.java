@@ -3,6 +3,8 @@ package systems.icetech.icebox.icetray.gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
+
 import systems.icetech.icebox.icetray.icecube.ReadSignal;
 
 public class ReadSigConfigPanel extends SignalConfiguratorPanel {
@@ -21,7 +23,9 @@ public class ReadSigConfigPanel extends SignalConfiguratorPanel {
 		};
 		createBtnListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				model.addElement(new ReadSignal("sigRead" + ++counterInt));
+				model.addElement(
+						new ReadSignal(JOptionPane.showInputDialog("Choose a name for the signal"))
+						);
 			}
 		};
 		btnDeleteSel.addActionListener(delBtnListener);

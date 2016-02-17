@@ -3,6 +3,8 @@ package systems.icetech.icebox.icetray.gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
+
 import systems.icetech.icebox.icetray.icecube.WriteSignal;
 
 public class WriteSigConfigPanel extends SignalConfiguratorPanel {
@@ -21,7 +23,9 @@ public class WriteSigConfigPanel extends SignalConfiguratorPanel {
 		};
 		createBtnListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				model.addElement(new WriteSignal("sigWrite" + ++counterInt));
+				model.addElement(
+						new WriteSignal(JOptionPane.showInputDialog("Choose a name for the signal"))
+						);
 			}
 		};
 		btnDeleteSel.addActionListener(delBtnListener);
