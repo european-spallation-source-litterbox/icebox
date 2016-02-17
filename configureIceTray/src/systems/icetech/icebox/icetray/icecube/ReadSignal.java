@@ -22,6 +22,10 @@ public class ReadSignal extends Signal {
 		setPvName(getName() + ":get");
 		setRecordType("ai");
 	}
+	
+	public ReadSignal(String nameInput) {
+		this(nameInput, ".1 second");
+	}
 
 	@Override
 	public String WriteEPICSRecord(String fileName) {
