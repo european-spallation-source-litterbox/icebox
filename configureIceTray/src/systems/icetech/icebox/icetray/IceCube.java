@@ -128,7 +128,7 @@ public class IceCube {
 	}
 
 	public static void main(String[] args) {
-		String filepath = "/Users/stephenmolloy/Documents/workspace/jsonTests/src/systems/icetech/test/jsonTests/";
+		String filepath = "/Users/stephenmolloy/Code/gitRepos/icebox/configureIceTray/src/systems/icetech/test/jsonTests/";
 		try {
 			IceCube iceCubeObj = new IceCube(Json.createReader(new FileReader(filepath + "example.json")).readObject());
 			System.out.println(iceCubeObj.getEpicsDBString());
