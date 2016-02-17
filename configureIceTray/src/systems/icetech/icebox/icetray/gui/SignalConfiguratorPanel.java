@@ -18,8 +18,6 @@ public abstract class SignalConfiguratorPanel extends JPanel {
 	private static final long serialVersionUID = -9104767885807126408L;
 	private JLabel lblSigs;
 	private JPanel sigButtonPanel;
-	//protected ActionListener createBtnListener;
-	//protected ActionListener delBtnListener;
 	
 	public JList<String> sigList;
 	protected JButton btnDeleteSel;
@@ -47,11 +45,9 @@ public abstract class SignalConfiguratorPanel extends JPanel {
 		
 		btnDeleteSel = new JButton("Delete Selected");
 		sigButtonPanel.add(btnDeleteSel, BorderLayout.NORTH);
-		//btnDeleteSel.addActionListener(delBtnListener);
 		
 		btnCreateNewSignal= new JButton("Create New Signal");
 		sigButtonPanel.add(btnCreateNewSignal, BorderLayout.SOUTH);
-		//btnCreateNewSignal.addActionListener(createBtnListener);
 	}
 
 	protected abstract String buttonText();
