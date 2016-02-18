@@ -42,36 +42,40 @@ public class IceCube {
 	 * corresponding to the EPICS DB definition file, and one for
 	 * the EPICS protocol file.
 	 */
-	private String name;
-	private List<Signal> signals = new ArrayList<Signal>();
-	private String epicsDBString; // the contents of the EPICS DB defn file
-	private String epicsProtoString; // the contents of the EPICS proto file
+	private final String name;
+	private final List<Signal> signals;
+	private final String epicsDBString; // the contents of the EPICS DB defn file
+	private final String epicsProtoString; // the contents of the EPICS proto file
 	private Integer protoCharCtr = 0; // A ctr to keep track of the no of proto funcs
+	private final String dbFileName = "arduino.db";
 
 	public IceCube(JsonObject jsonInput) {
-		setName(jsonInput.getString("name"));
+		this.name = jsonInput.getString("name");
 		
+		List<Signal> tempSignals = new ArrayList<Signal>();
 		JsonArray jsonSigs = jsonInput.getJsonArray("signals");
 		for (int i=0; i<jsonSigs.size(); i++) {
 			JsonObject jsonObj = jsonSigs.getJsonObject(i);
 			if (jsonObj.getString("RW").equals("R")) {
-				signals.add(new ReadSignal(jsonObj));
+				tempSignals.add(new ReadSignal(jsonObj));
 			}
 			else if (jsonObj.getString("RW").equals("W")) {
-				signals.add(new WriteSignal(jsonObj));
+				tempSignals.add(new WriteSignal(jsonObj));
 			}
 		}
 		
-		setEpicsDBString(makeEpicsDBString("arduino.db"));
-		setEpicsProtoString(makeEpicsProtoString());
+		this.signals = new ArrayList<Signal>(tempSignals);
+		
+		this.epicsDBString = makeEpicsDBString(dbFileName);
+		this.epicsProtoString = makeEpicsProtoString();
 	}
 	
 	public IceCube(String nameInput, List<Signal> signalsInput) {
-		setName(nameInput);
-		setSignals(signalsInput);
+		this.name = nameInput;
+		this.signals = new ArrayList<Signal>(signalsInput);
 		
-		setEpicsDBString(makeEpicsDBString("arduibo.db"));
-		setEpicsProtoString(makeEpicsProtoString());
+		this.epicsDBString = makeEpicsDBString(dbFileName);
+		this.epicsProtoString = makeEpicsProtoString();
 	}
 	
 	public String makeEpicsDBString(String fileName) {
@@ -107,32 +111,16 @@ public class IceCube {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public List<Signal> getSignals() {
 		return signals;
-	}
-
-	public void setSignals(List<Signal> signals) {
-		this.signals = signals;
 	}
 
 	public String getEpicsDBString() {
 		return epicsDBString;
 	}
 
-	public void setEpicsDBString(String epicsDBString) {
-		this.epicsDBString = epicsDBString;
-	}
-
 	public String getEpicsProtoString() {
 		return epicsProtoString;
-	}
-
-	public void setEpicsProtoString(String epicsProtoString) {
-		this.epicsProtoString = epicsProtoString;
 	}
 
 	public static void main(String[] args) {
