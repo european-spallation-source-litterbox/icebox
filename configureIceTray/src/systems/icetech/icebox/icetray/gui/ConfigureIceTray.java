@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 
 import java.awt.BorderLayout;
 
+import javax.swing.JFileChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -21,7 +22,10 @@ import systems.icetech.icebox.icetray.icecube.Signal;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -145,19 +149,20 @@ public class ConfigureIceTray {
 		}
 		IceCube iceCube = new IceCube(txtIceTrayName.getText(), allSigs);
 		
-		PrintWriter writer;
-		try {
-			writer = new PrintWriter("the-file-name.txt", "UTF-8");
-			writer.println(iceCube.getJsonRep());
-			writer.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		JFileChooser chooser = new JFileChooser();
+		chooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+		int retrieval = chooser.showSaveDialog(null);
+		if (retrieval==JFileChooser.APPROVE_OPTION) {
+			System.out.println(chooser.getSelectedFile());
+			try (FileWriter writer = new FileWriter(chooser.getSelectedFile() + ".json")) {
+				writer.write(iceCube.getJsonRep().toString());
+				writer.flush();
+				writer.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		System.out.println(iceCube.getJsonRep());
 	}
 	protected void quitProgram() {
 		System.exit(0);
