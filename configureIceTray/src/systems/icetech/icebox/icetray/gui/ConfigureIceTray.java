@@ -153,7 +153,6 @@ public class ConfigureIceTray {
 		chooser.setCurrentDirectory(new File(System.getProperty("user.home")));
 		int retrieval = chooser.showSaveDialog(null);
 		if (retrieval==JFileChooser.APPROVE_OPTION) {
-			System.out.println(chooser.getSelectedFile());
 			try (FileWriter writer = new FileWriter(chooser.getSelectedFile() + ".json")) {
 				writer.write(iceCube.getJsonRep().toString());
 				writer.flush();
