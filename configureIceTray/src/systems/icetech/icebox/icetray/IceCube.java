@@ -8,7 +8,10 @@ import java.util.List;
 
 import javax.json.Json;
 import javax.json.JsonArray;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonBuilderFactory;
 import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
 
 import systems.icetech.icebox.icetray.icecube.ReadSignal;
 import systems.icetech.icebox.icetray.icecube.Signal;
@@ -44,12 +47,14 @@ public class IceCube {
 	 */
 	private final String name;
 	private final List<Signal> signals;
+	private final JsonObject jsonRep;
 	private final String epicsDBString; // the contents of the EPICS DB defn file
 	private final String epicsProtoString; // the contents of the EPICS proto file
 	private Integer protoCharCtr = 0; // A ctr to keep track of the no of proto funcs
 	private final String dbFileName = "arduino.db";
 
 	public IceCube(JsonObject jsonInput) {
+		this.jsonRep = jsonInput;
 		this.name = jsonInput.getString("name");
 		
 		List<Signal> tempSignals = new ArrayList<Signal>();
@@ -73,6 +78,16 @@ public class IceCube {
 	public IceCube(String nameInput, List<Signal> signalsInput) {
 		this.name = nameInput;
 		this.signals = new ArrayList<Signal>(signalsInput);
+
+		JsonBuilderFactory factory = Json.createBuilderFactory(null);
+		JsonObjectBuilder jBuilder = factory.createObjectBuilder()
+				.add("name",  getName());
+		JsonArrayBuilder signalArrayBuilder = Json.createArrayBuilder();
+		for (int i=0; i<signals.size(); i++) {
+			signalArrayBuilder.add(signals.get(i).getJsonRep());
+		}
+		jBuilder.add("signals", signalArrayBuilder);
+		this.jsonRep = jBuilder.build();
 		
 		this.epicsDBString = makeEpicsDBString(dbFileName);
 		this.epicsProtoString = makeEpicsProtoString();
@@ -121,6 +136,10 @@ public class IceCube {
 
 	public String getEpicsProtoString() {
 		return epicsProtoString;
+	}
+
+	public JsonObject getJsonRep() {
+		return jsonRep;
 	}
 
 	public static void main(String[] args) {
