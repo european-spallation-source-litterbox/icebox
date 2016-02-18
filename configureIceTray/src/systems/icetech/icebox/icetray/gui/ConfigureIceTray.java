@@ -150,6 +150,12 @@ public class ConfigureIceTray {
 				IceCube iceCubeObj = new IceCube(Json.createReader(new FileReader(chooser.getSelectedFile())).readObject());
 				txtIceTrayName.setText(iceCubeObj.getName());
 				readSigPanel.model.removeAllElements();
+				for (Signal i : iceCubeObj.getReadSignals()) {
+					readSigPanel.model.addElement(i);
+				}
+				for (Signal i : iceCubeObj.getWriteSignals()) {
+					writeSigPanel.model.addElement(i);
+				}
 				System.out.println(iceCubeObj);
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
