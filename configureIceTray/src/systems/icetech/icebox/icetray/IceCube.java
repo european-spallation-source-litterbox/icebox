@@ -97,7 +97,7 @@ public class IceCube {
 		String outString = "";
 		Iterator<Signal> iceCubeIterator = this.getSignals().iterator();
 		while (iceCubeIterator.hasNext()) {
-			outString += iceCubeIterator.next().WriteEPICSRecord(fileName);
+			outString += iceCubeIterator.next().writeEPICSRecord(fileName);
 		}
 		return outString;
 	}
@@ -108,7 +108,7 @@ public class IceCube {
 		String outString = "Terminator = LF;\n";
 		Iterator<Signal> iceCubeIterator = this.getSignals().iterator();
 		while (iceCubeIterator.hasNext()) {
-			outString += iceCubeIterator.next().WriteEPICSProtoFunc(alphabet.charAt(protoCharCtr));
+			outString += iceCubeIterator.next().writeEPICSProtoFunc(alphabet.charAt(protoCharCtr));
 			protoCharCtr++;
 		}
 		return outString;

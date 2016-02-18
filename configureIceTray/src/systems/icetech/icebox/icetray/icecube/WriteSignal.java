@@ -29,7 +29,7 @@ public class WriteSignal extends Signal {
 	}
 
 	@Override
-	public String WriteEPICSRecord(String fileName) {
+	public String writeEPICSRecord(String fileName) {
 		String outString = "record(" + getRecordType() + ", " + getPvName() + ") {\n";
 		outString += "\t" + epicsDBFieldString("DTYP", "stream");
 		outString += "\t" + epicsDBFieldString("OUT", "@"+fileName+" set_"+getName()+"() $(PORT)");
@@ -38,7 +38,7 @@ public class WriteSignal extends Signal {
 	}
 
 	@Override
-	public String WriteEPICSProtoFunc(char sig) {
+	public String writeEPICSProtoFunc(char sig) {
 		String outString = "set_" + getName() + " {\n";
 		outString += "\tout \"" + sig + "%d\\n\";\n";
 		outString += "\tExtraInput = Ignore;\n";

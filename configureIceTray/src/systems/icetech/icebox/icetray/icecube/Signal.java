@@ -23,9 +23,9 @@ public abstract class Signal {
 		return outString;
 	}
 	
-	public abstract String WriteEPICSRecord(String fileName);
+	public abstract String writeEPICSRecord(String fileName);
 	
-	public abstract String WriteEPICSProtoFunc(char sig);
+	public abstract String writeEPICSProtoFunc(char sig);
 	
 	protected abstract void buildJsonRep();
 	
