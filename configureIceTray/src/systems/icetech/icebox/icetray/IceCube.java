@@ -66,6 +66,14 @@ public class IceCube {
 		setEpicsProtoString(makeEpicsProtoString());
 	}
 	
+	public IceCube(String nameInput, List<Signal> signalsInput) {
+		setName(nameInput);
+		setSignals(signalsInput);
+		
+		setEpicsDBString(makeEpicsDBString("arduibo.db"));
+		setEpicsProtoString(makeEpicsProtoString());
+	}
+	
 	public String makeEpicsDBString(String fileName) {
 		String outString = "";
 		Iterator<Signal> iceCubeIterator = this.getSignals().iterator();
