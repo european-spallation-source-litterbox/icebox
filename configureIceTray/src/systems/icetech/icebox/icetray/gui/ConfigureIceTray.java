@@ -2,6 +2,7 @@ package systems.icetech.icebox.icetray.gui;
 
 import java.awt.EventQueue;
 
+import javax.json.Json;
 import javax.swing.JFrame;
 
 import java.awt.BorderLayout;
@@ -25,6 +26,8 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -143,7 +146,13 @@ public class ConfigureIceTray {
 		chooser.setCurrentDirectory(new File(System.getProperty("user.home")));
 		chooser.setFileFilter(new FileNameExtensionFilter("JSON files", "json"));
 		if (chooser.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION) {
-			System.out.println(chooser.getSelectedFile());
+			try {
+				IceCube iceCubeObj = new IceCube(Json.createReader(new FileReader(chooser.getSelectedFile())).readObject());
+				System.out.println(iceCubeObj);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	private void saveFile() {
