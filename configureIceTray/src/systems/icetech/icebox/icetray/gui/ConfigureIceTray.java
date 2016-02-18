@@ -21,6 +21,9 @@ import systems.icetech.icebox.icetray.icecube.Signal;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -141,6 +144,19 @@ public class ConfigureIceTray {
 			allSigs.add(writeSigPanel.model.elementAt(i));
 		}
 		IceCube iceCube = new IceCube(txtIceTrayName.getText(), allSigs);
+		
+		PrintWriter writer;
+		try {
+			writer = new PrintWriter("the-file-name.txt", "UTF-8");
+			writer.println(iceCube.getJsonRep());
+			writer.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println(iceCube.getJsonRep());
 	}
 	protected void quitProgram() {
