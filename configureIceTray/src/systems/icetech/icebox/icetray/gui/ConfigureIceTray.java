@@ -156,7 +156,6 @@ public class ConfigureIceTray {
 				for (Signal i : iceCubeObj.getWriteSignals()) {
 					writeSigPanel.model.addElement(i);
 				}
-				System.out.println(iceCubeObj);
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
