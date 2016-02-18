@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.BoxLayout;
 import javax.swing.UIManager;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import systems.icetech.icebox.icetray.IceCube;
 import systems.icetech.icebox.icetray.icecube.Signal;
@@ -138,7 +139,12 @@ public class ConfigureIceTray {
 		}
 	}
 	private void openFile() {
-		// TODO Auto-generated method stub
+		JFileChooser chooser = new JFileChooser();
+		chooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+		chooser.setFileFilter(new FileNameExtensionFilter("JSON files", "json"));
+		if (chooser.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION) {
+			System.out.println(chooser.getSelectedFile());
+		}
 	}
 	private void saveFile() {
 		List<Signal> allSigs = new ArrayList<Signal>();
