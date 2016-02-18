@@ -47,6 +47,8 @@ public class IceCube {
 	 */
 	private final String name;
 	private final List<Signal> signals;
+	private List<Signal> readSignals;
+	private List<Signal> writeSignals; 
 	private final JsonObject jsonRep;
 	private final String epicsDBString; // the contents of the EPICS DB defn file
 	private final String epicsProtoString; // the contents of the EPICS proto file
@@ -56,19 +58,25 @@ public class IceCube {
 	public IceCube(JsonObject jsonInput) {
 		this.jsonRep = jsonInput;
 		this.name = jsonInput.getString("name");
-		
+
 		List<Signal> tempSignals = new ArrayList<Signal>();
+		List<Signal> tempRSignals = new ArrayList<Signal>();
+		List<Signal> tempWSignals = new ArrayList<Signal>();
 		JsonArray jsonSigs = jsonInput.getJsonArray("signals");
 		for (int i=0; i<jsonSigs.size(); i++) {
 			JsonObject jsonObj = jsonSigs.getJsonObject(i);
 			if (jsonObj.getString("RW").equals("R")) {
 				tempSignals.add(new ReadSignal(jsonObj));
+				tempRSignals.add(new ReadSignal(jsonObj));
 			}
 			else if (jsonObj.getString("RW").equals("W")) {
 				tempSignals.add(new WriteSignal(jsonObj));
+				tempWSignals.add(new WriteSignal(jsonObj));
 			}
 		}
 		
+		this.readSignals = new ArrayList<Signal>(tempRSignals);
+		this.writeSignals = new ArrayList<Signal>(tempWSignals);
 		this.signals = new ArrayList<Signal>(tempSignals);
 		
 		this.epicsDBString = makeEpicsDBString(dbFileName);
@@ -140,6 +148,14 @@ public class IceCube {
 
 	public JsonObject getJsonRep() {
 		return jsonRep;
+	}
+
+	public List<Signal> getReadSignals() {
+		return readSignals;
+	}
+
+	public List<Signal> getWriteSignals() {
+		return writeSignals;
 	}
 
 	public static void main(String[] args) {
