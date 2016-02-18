@@ -15,10 +15,14 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.BoxLayout;
 
-import java.awt.FlowLayout;
+import systems.icetech.icebox.icetray.IceCube;
+import systems.icetech.icebox.icetray.icecube.Signal;
 
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConfigureIceTray {
 
@@ -129,7 +133,15 @@ public class ConfigureIceTray {
 		// TODO Auto-generated method stub
 	}
 	private void saveFile() {
-		// TODO Auto-generated method stub
+		List<Signal> allSigs = new ArrayList<Signal>();
+		for (int i=0; i<readSigPanel.model.getSize(); i++) {
+			allSigs.add(readSigPanel.model.elementAt(i));
+		}
+		for (int i=0; i<writeSigPanel.model.getSize(); i++) {
+			allSigs.add(writeSigPanel.model.elementAt(i));
+		}
+		IceCube iceCube = new IceCube(txtIceTrayName.getText(), allSigs);
+		System.out.println(iceCube.getJsonRep());
 	}
 	protected void quitProgram() {
 		System.exit(0);
