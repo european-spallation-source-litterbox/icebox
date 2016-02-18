@@ -148,6 +148,8 @@ public class ConfigureIceTray {
 		if (chooser.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION) {
 			try {
 				IceCube iceCubeObj = new IceCube(Json.createReader(new FileReader(chooser.getSelectedFile())).readObject());
+				txtIceTrayName.setText(iceCubeObj.getName());
+				readSigPanel.model.removeAllElements();
 				System.out.println(iceCubeObj);
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
