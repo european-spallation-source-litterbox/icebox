@@ -159,7 +159,7 @@ public class ConfigureIceTray {
 				writer.flush();
 				writer.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				JOptionPane.showMessageDialog(frame, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				e.printStackTrace();
 			}
 		}
