@@ -35,7 +35,8 @@ public class ConfigureIceTray {
 	private JPanel primaryPanel;
 	private ReadSigConfigPanel readSigPanel;
 	private WriteSigConfigPanel writeSigPanel;
-	private String helpAboutString = "Ice-Tray configuriser.\nFeb 2016";
+	private final String helpAboutString = "Ice-Tray configuriser.\nFeb 2016";
+	private final String helpHelpString = "You're beyond help.";
 
 	/**
 	 * Launch the application.
@@ -167,6 +168,6 @@ public class ConfigureIceTray {
 		JOptionPane.showMessageDialog(frame, helpAboutString);
 	}
 	private void helpHelp() {
-		JOptionPane.showMessageDialog(frame, "You're beyond help.");
+		JOptionPane.showMessageDialog(frame, helpHelpString);
 	}
 }
