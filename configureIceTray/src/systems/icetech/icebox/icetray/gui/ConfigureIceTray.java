@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.BoxLayout;
+import javax.swing.UIManager;
 
 import systems.icetech.icebox.icetray.IceCube;
 import systems.icetech.icebox.icetray.icecube.Signal;
@@ -45,6 +46,8 @@ public class ConfigureIceTray {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					UIManager.setLookAndFeel(
+				            UIManager.getSystemLookAndFeelClassName());
 					ConfigureIceTray window = new ConfigureIceTray();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
