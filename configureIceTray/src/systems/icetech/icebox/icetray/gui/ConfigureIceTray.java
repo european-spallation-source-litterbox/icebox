@@ -14,6 +14,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 import javax.swing.BoxLayout;
 import javax.swing.UIManager;
@@ -25,6 +26,7 @@ import systems.icetech.icebox.icetray.icecube.Signal;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -108,6 +110,10 @@ public class ConfigureIceTray {
     		{"Open","Save","Exit"},
     		{"Help", "About"}
     	};
+        Integer subMenuKeyEvent[][] = {
+        		{KeyEvent.VK_O, KeyEvent.VK_S,KeyEvent.VK_Q},
+        		{KeyEvent.VK_H,-1}
+        };
 
         for (int i = 0; i < menuText.length; i++)
         {
@@ -118,6 +124,9 @@ public class ConfigureIceTray {
             {
                 JMenuItem item = new JMenuItem(subMenuText[i][j]);
                 menu.add(item);
+                if (!subMenuKeyEvent[i][j].equals(-1)) {
+                	item.setAccelerator(KeyStroke.getKeyStroke(subMenuKeyEvent[i][j], ActionEvent.CTRL_MASK));
+                }
                 item.addActionListener(new IceTrayActionListener(menuText[i] + "." +subMenuText[i][j], this));
             }
         }
