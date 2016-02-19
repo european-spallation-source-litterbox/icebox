@@ -1,4 +1,4 @@
-package systems.icetech.icebox.icetray.icecube;
+package se.esss.litterbox.icebox.icetray.icecube;
 
 import javax.json.Json;
 import javax.json.JsonBuilderFactory;

@@ -1,4 +1,4 @@
-package systems.icetech.icebox.icetray.gui;
+package se.esss.litterbox.icebox.icetray.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -13,7 +13,7 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
-import systems.icetech.icebox.icetray.icecube.Signal;
+import se.esss.litterbox.icebox.icetray.icecube.Signal;
 
 public abstract class SignalConfiguratorPanel extends JPanel {
 

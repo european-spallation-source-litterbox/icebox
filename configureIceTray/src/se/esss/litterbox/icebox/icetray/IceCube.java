@@ -1,4 +1,4 @@
-package systems.icetech.icebox.icetray;
+package se.esss.litterbox.icebox.icetray;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -13,9 +13,9 @@ import javax.json.JsonBuilderFactory;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 
-import systems.icetech.icebox.icetray.icecube.ReadSignal;
-import systems.icetech.icebox.icetray.icecube.Signal;
-import systems.icetech.icebox.icetray.icecube.WriteSignal;
+import se.esss.litterbox.icebox.icetray.icecube.ReadSignal;
+import se.esss.litterbox.icebox.icetray.icecube.Signal;
+import se.esss.litterbox.icebox.icetray.icecube.WriteSignal;
 
 public class IceCube {
 	/*
