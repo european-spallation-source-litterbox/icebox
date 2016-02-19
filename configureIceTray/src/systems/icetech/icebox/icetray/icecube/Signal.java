@@ -45,4 +45,6 @@ public abstract class Signal {
 		return name;
 	}
 	
+	public abstract boolean equals(Object inputObject);
+	
 }

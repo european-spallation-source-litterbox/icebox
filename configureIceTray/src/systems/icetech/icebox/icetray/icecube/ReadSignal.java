@@ -87,4 +87,15 @@ public class ReadSignal extends Signal {
 		return pvName;
 	}
 
+	public boolean equals(Object inputObject) {
+		if (this==inputObject) return true;
+		if (this.getClass() != inputObject.getClass()) return false;
+		
+		ReadSignal inputSignal = (ReadSignal) inputObject;
+		
+		return this.scanRate.equals(inputSignal.scanRate)
+				&& this.pvName.equals(inputSignal.pvName)
+				&& this.recordType.equals(inputSignal.recordType)
+				&& this.getName().equals(inputSignal.getName());
+	}
 }
