@@ -36,7 +36,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConfigureIceTray {
+public class ConfigureIceCube {
 
 	private JFrame frame;
 	private JTextField txtIceTrayName;
@@ -55,7 +55,7 @@ public class ConfigureIceTray {
 				try {
 					UIManager.setLookAndFeel(
 				            UIManager.getSystemLookAndFeelClassName());
-					ConfigureIceTray window = new ConfigureIceTray();
+					ConfigureIceCube window = new ConfigureIceCube();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -67,7 +67,7 @@ public class ConfigureIceTray {
 	/**
 	 * Create the application.
 	 */
-	public ConfigureIceTray() {
+	public ConfigureIceCube() {
 		initialize();
 	}
 
@@ -136,11 +136,11 @@ public class ConfigureIceTray {
 	}
 
 	private static class IceTrayActionListener implements ActionListener {
-		ConfigureIceTray iceTrayConfigurizer;
+		ConfigureIceCube iceTrayConfigurizer;
 		String actionString = "";
-		IceTrayActionListener(String actionString, ConfigureIceTray configureIceTray) {
+		IceTrayActionListener(String actionString, ConfigureIceCube configureIceCube) {
 			this.actionString = actionString;
-			this.iceTrayConfigurizer = configureIceTray;
+			this.iceTrayConfigurizer = configureIceCube;
 		}
 		
 		public void actionPerformed(ActionEvent arg0) {
