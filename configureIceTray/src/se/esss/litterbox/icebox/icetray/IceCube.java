@@ -13,6 +13,8 @@ import javax.json.JsonBuilderFactory;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 
+import se.esss.litterbox.icebox.exceptions.IceCubeException;
+import se.esss.litterbox.icebox.exceptions.SignalException;
 import se.esss.litterbox.icebox.icetray.icecube.ReadSignal;
 import se.esss.litterbox.icebox.icetray.icecube.Signal;
 import se.esss.litterbox.icebox.icetray.icecube.WriteSignal;
@@ -55,7 +57,7 @@ public class IceCube {
 	private Integer protoCharCtr = 0; // A ctr to keep track of the no of proto funcs
 	private final String dbFileName = "arduino.db";
 
-	public IceCube(JsonObject jsonInput) {
+	public IceCube(JsonObject jsonInput) throws IceCubeException {
 		this.jsonRep = jsonInput;
 		this.name = jsonInput.getString("name");
 
@@ -66,12 +68,20 @@ public class IceCube {
 		for (int i=0; i<jsonSigs.size(); i++) {
 			JsonObject jsonObj = jsonSigs.getJsonObject(i);
 			if (jsonObj.getString("RW").equals("R")) {
-				tempSignals.add(new ReadSignal(jsonObj));
-				tempRSignals.add(new ReadSignal(jsonObj));
+				try {
+					tempSignals.add(new ReadSignal(jsonObj));
+					tempRSignals.add(new ReadSignal(jsonObj));
+				} catch (SignalException e) {
+					throw new IceCubeException(e.getMessage());
+				}
 			}
 			else if (jsonObj.getString("RW").equals("W")) {
-				tempSignals.add(new WriteSignal(jsonObj));
-				tempWSignals.add(new WriteSignal(jsonObj));
+				try {
+					tempSignals.add(new WriteSignal(jsonObj));
+					tempWSignals.add(new WriteSignal(jsonObj));
+				} catch (SignalException e) {
+					throw new IceCubeException(e.getMessage());
+				}
 			}
 		}
 		
@@ -165,6 +175,8 @@ public class IceCube {
 			System.out.println(iceCubeObj.getEpicsDBString());
 			System.out.println(iceCubeObj.getEpicsProtoString());
 		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IceCubeException e) {
 			e.printStackTrace();
 		}
 	}
