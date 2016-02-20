@@ -81,7 +81,7 @@ public class ConfigureIceCube {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setResizable(false);
-		frame.setBounds(100, 100, 535, 291);
+		frame.setBounds(100, 100, 537, 334);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		makeMenuBar();
