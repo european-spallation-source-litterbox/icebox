@@ -68,6 +68,7 @@ public class WriteSignal extends Signal {
 		return recordType;
 	}
 
+	@Override
 	public boolean equals(Object inputObject) {
 		if (this==inputObject) return true;
 		if (this.getClass() != inputObject.getClass()) return false;
