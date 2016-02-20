@@ -41,7 +41,6 @@ public class ReadSigConfigPanel extends SignalConfiguratorPanel {
 							e1.getMessage(),
 							"Error",
 							JOptionPane.ERROR_MESSAGE);
-					e1.printStackTrace();
 				}
 			}
 		};
