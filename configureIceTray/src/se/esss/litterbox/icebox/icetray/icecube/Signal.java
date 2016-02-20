@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 import javax.json.JsonObject;
 
 import se.esss.litterbox.icebox.exceptions.SignalException;
+import se.esss.litterbox.icebox.utilities.InputChecker;
 
 public abstract class Signal {
 
@@ -14,7 +15,7 @@ public abstract class Signal {
 
 	public Signal(JsonObject jsonInput) throws SignalException {
 		this.name = jsonInput.getString("name");
-		if (!checkName()) {
+		if (!InputChecker.nameChecker(name)){
 			throw new SignalException("Illegal signal name");
 		}
 		
