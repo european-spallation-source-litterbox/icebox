@@ -10,6 +10,8 @@ import java.io.IOException;
 import javax.json.Json;
 import javax.json.JsonObject;
 
+import se.esss.litterbox.icebox.exceptions.IceCubeException;
+
 public class EpicsIOC {
 	
 	private final String iocNameString;
@@ -17,7 +19,7 @@ public class EpicsIOC {
 	private final File iocTopDir;
 	private final IceCube iceCube;
 
-	public EpicsIOC(JsonObject jsonInput) throws IOException {
+	public EpicsIOC(JsonObject jsonInput) throws IOException, IceCubeException {
 		iceCube = new IceCube(jsonInput);
 		
 		iocNameString = new String(iceCube.getName());
@@ -239,6 +241,9 @@ public class EpicsIOC {
 			EpicsIOC epicsIOC = new EpicsIOC(Json.createReader(new FileReader(filepath + "example.json")).readObject());
 			epicsIOC.makeIceIOC();
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (IceCubeException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
