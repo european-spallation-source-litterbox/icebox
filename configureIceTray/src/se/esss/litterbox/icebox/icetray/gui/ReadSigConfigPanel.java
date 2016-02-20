@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
+import se.esss.litterbox.icebox.exceptions.SignalException;
 import se.esss.litterbox.icebox.icetray.icecube.ReadSignal;
 
 public class ReadSigConfigPanel extends SignalConfiguratorPanel {
@@ -23,12 +24,21 @@ public class ReadSigConfigPanel extends SignalConfiguratorPanel {
 		};
 		createBtnListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ReadSignal newSignal = new ReadSignal(JOptionPane.showInputDialog("Choose a name for the signal"));
-				if (model.contains(newSignal)) {
-					JOptionPane.showMessageDialog(btnCreateNewSignal,  "No dupes please");
-				}
-				else {
-					model.addElement(newSignal);
+				ReadSignal newSignal;
+				try {
+					newSignal = new ReadSignal(JOptionPane.showInputDialog("Choose a name for the signal"));
+					if (model.contains(newSignal)) {
+						JOptionPane.showMessageDialog(btnCreateNewSignal,  "No dupes please");
+					}
+					else {
+						model.addElement(newSignal);
+					}
+				} catch (SignalException e1) {
+					JOptionPane.showMessageDialog(btnCreateNewSignal,
+							e1.getMessage(),
+							"Error",
+							JOptionPane.ERROR_MESSAGE);
+					e1.printStackTrace();
 				}
 			}
 		};

@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
+import se.esss.litterbox.icebox.exceptions.SignalException;
 import se.esss.litterbox.icebox.icetray.icecube.WriteSignal;
 
 public class WriteSigConfigPanel extends SignalConfiguratorPanel {
@@ -23,9 +24,22 @@ public class WriteSigConfigPanel extends SignalConfiguratorPanel {
 		};
 		createBtnListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				model.addElement(
-						new WriteSignal(JOptionPane.showInputDialog("Choose a name for the signal"))
-						);
+				WriteSignal newSignal;
+				try {
+					newSignal = new WriteSignal(JOptionPane.showInputDialog("Choose a name for the signal"));
+					if (model.contains(newSignal)) {
+						JOptionPane.showMessageDialog(btnCreateNewSignal,  "No dupes please");
+					}
+					else {
+						model.addElement(newSignal);
+					}
+				} catch (SignalException e1) {
+					JOptionPane.showMessageDialog(btnCreateNewSignal,
+							e1.getMessage(),
+							"Error",
+							JOptionPane.ERROR_MESSAGE);
+					e1.printStackTrace();
+				}
 			}
 		};
 		btnDeleteSel.addActionListener(delBtnListener);
