@@ -4,13 +4,15 @@ import javax.json.Json;
 import javax.json.JsonBuilderFactory;
 import javax.json.JsonObject;
 
+import se.esss.litterbox.icebox.exceptions.SignalException;
+
 public class ReadSignal extends Signal {
 	
 	private final String scanRate;
 	private final String recordType = "ai";
 	private JsonObject jsonRep;
 
-	public ReadSignal(JsonObject jsonInput) {
+	public ReadSignal(JsonObject jsonInput) throws SignalException {
 		super(jsonInput);
 
 		this.scanRate = jsonInput.getString("scanRate");
@@ -18,14 +20,14 @@ public class ReadSignal extends Signal {
 		buildJsonRep();
 	}
 	
-	public ReadSignal(String nameInput, String scanRateString) {
+	public ReadSignal(String nameInput, String scanRateString) throws SignalException {
 		super(nameInput);
 		this.scanRate = scanRateString;
 		
 		buildJsonRep();
 	}
 	
-	public ReadSignal(String nameInput) {
+	public ReadSignal(String nameInput) throws SignalException {
 		this(nameInput, ".1 second");
 	}
 	

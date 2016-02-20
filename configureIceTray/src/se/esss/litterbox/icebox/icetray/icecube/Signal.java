@@ -1,19 +1,32 @@
 package se.esss.litterbox.icebox.icetray.icecube;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.json.JsonObject;
+
+import se.esss.litterbox.icebox.exceptions.SignalException;
 
 public abstract class Signal {
 
 	private final String name;
 	private final String pvName;
 
-	public Signal(JsonObject jsonInput) {
+	public Signal(JsonObject jsonInput) throws SignalException {
 		this.name = jsonInput.getString("name");
+		if (!checkName()) {
+			throw new SignalException("Illegal signal name");
+		}
+		
 		this.pvName = this.name + getPvExt();
 	}
 	
-	public Signal(String nameInput) {
+	public Signal(String nameInput) throws SignalException {
 		this.name = nameInput;
+		if (!checkName()) {
+			throw new SignalException("Illegal signal name");
+		}
+		
 		this.pvName = this.name + getPvExt();
 	}
 	
@@ -24,6 +37,15 @@ public abstract class Signal {
 		outString += "\"" + value + "\"";
 		outString += ")\n";
 		return outString;
+	}
+	
+	protected Boolean checkName() {
+		if (name.isEmpty()) return false;
+		if (Character.isDigit(name.charAt(0))) return false;
+		Pattern pattern = Pattern.compile("\\s");
+		Matcher matcher = pattern.matcher(name);
+		if (matcher.find()) return false;
+		return true;
 	}
 	
 	public abstract String writeEPICSRecord(String fileName);
