@@ -7,7 +7,6 @@ import javax.json.JsonObject;
 public class ReadSignal extends Signal {
 	
 	private final String scanRate;
-	private final String pvName;
 	private final String recordType = "ai";
 	private JsonObject jsonRep;
 
@@ -15,7 +14,6 @@ public class ReadSignal extends Signal {
 		super(jsonInput);
 
 		this.scanRate = jsonInput.getString("scanRate");
-		this.pvName = getName() + ":get";
 		
 		buildJsonRep();
 	}
@@ -23,7 +21,6 @@ public class ReadSignal extends Signal {
 	public ReadSignal(String nameInput, String scanRateString) {
 		super(nameInput);
 		this.scanRate = scanRateString;
-		this.pvName = getName() + ":get";
 		
 		buildJsonRep();
 	}
@@ -74,17 +71,9 @@ public class ReadSignal extends Signal {
 	public String getScanRate() {
 		return scanRate;
 	}
-	
-	public String getPVName() {
-		return getName() + ":get";
-	}
 
 	public String getRecordType() {
 		return recordType;
-	}
-
-	public String getPvName() {
-		return pvName;
 	}
 
 	@Override
@@ -95,8 +84,13 @@ public class ReadSignal extends Signal {
 		ReadSignal inputSignal = (ReadSignal) inputObject;
 		
 		return this.scanRate.equals(inputSignal.scanRate)
-				&& this.pvName.equals(inputSignal.pvName)
+				&& this.getPvName().equals(inputSignal.getPvName())
 				&& this.recordType.equals(inputSignal.recordType)
 				&& this.getName().equals(inputSignal.getName());
+	}
+
+	@Override
+	protected String getPvExt() {
+		return ":get";
 	}
 }

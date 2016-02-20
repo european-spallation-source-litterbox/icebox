@@ -6,20 +6,17 @@ import javax.json.JsonObject;
 
 public class WriteSignal extends Signal {
 
-	private final String pvName;
 	private final String recordType = "ao";
 	private JsonObject jsonRep;
 
 	public WriteSignal(JsonObject jsonInput) {
 		super(jsonInput);
-		this.pvName = getName() + ":set";
 		
 		buildJsonRep();
 	}
 	
 	public WriteSignal(String nameInput) {
 		super(nameInput);
-		this.pvName = getName() + ":set";
 		
 		buildJsonRep();
 	}
@@ -60,10 +57,6 @@ public class WriteSignal extends Signal {
 		return false;
 	}
 
-	public String getPvName() {
-		return pvName;
-	}
-
 	public String getRecordType() {
 		return recordType;
 	}
@@ -75,7 +68,7 @@ public class WriteSignal extends Signal {
 		
 		WriteSignal inputSignal = (WriteSignal) inputObject;
 		
-		return this.pvName.equals(inputSignal.pvName)
+		return this.getPvName().equals(inputSignal.getPvName())
 				&& this.recordType.equals(inputSignal.recordType)
 				&& this.getName().equals(inputSignal.getName());
 	}
@@ -90,5 +83,10 @@ public class WriteSignal extends Signal {
 		System.out.println(a.equals(b)); // this should be true
 		System.out.println(a.equals(a)); // this should be true
 		System.out.println(b.equals(a)); // this should be true
+	}
+
+	@Override
+	protected String getPvExt() {
+		return ":set";
 	}
 }

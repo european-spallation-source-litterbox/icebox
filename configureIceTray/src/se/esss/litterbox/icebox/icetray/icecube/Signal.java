@@ -5,13 +5,16 @@ import javax.json.JsonObject;
 public abstract class Signal {
 
 	private final String name;
+	private final String pvName;
 
 	public Signal(JsonObject jsonInput) {
 		this.name = jsonInput.getString("name");
+		this.pvName = this.name + getPvExt();
 	}
 	
 	public Signal(String nameInput) {
 		this.name = nameInput;
+		this.pvName = this.name + getPvExt();
 	}
 	
 	protected String epicsDBFieldString(String key, String value) {
@@ -30,6 +33,8 @@ public abstract class Signal {
 	protected abstract void buildJsonRep();
 	
 	public abstract JsonObject getJsonRep();
+	
+	protected abstract String getPvExt();
 
 	public abstract boolean isRead();
 	
@@ -46,5 +51,9 @@ public abstract class Signal {
 	}
 	
 	public abstract boolean equals(Object inputObject);
+
+	public String getPvName() {
+		return pvName;
+	}
 	
 }
