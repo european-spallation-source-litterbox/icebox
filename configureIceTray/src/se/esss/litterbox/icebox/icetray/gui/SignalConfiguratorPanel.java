@@ -25,6 +25,7 @@ public abstract class SignalConfiguratorPanel extends JPanel {
 	protected JButton btnDeleteSel;
 	protected JButton btnCreateNewSignal;
 	public DefaultListModel<Signal> model;
+	protected final String dupeSigErrorString = "A signal with this name already exists";
 
 	public SignalConfiguratorPanel() {
 		setLayout(new BorderLayout(0, 0));

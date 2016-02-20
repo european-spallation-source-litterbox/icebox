@@ -28,7 +28,10 @@ public class WriteSigConfigPanel extends SignalConfiguratorPanel {
 				try {
 					newSignal = new WriteSignal(JOptionPane.showInputDialog("Choose a name for the signal"));
 					if (model.contains(newSignal)) {
-						JOptionPane.showMessageDialog(btnCreateNewSignal,  "No dupes please");
+						JOptionPane.showMessageDialog(btnCreateNewSignal,
+								dupeSigErrorString,
+								"Error",
+								JOptionPane.ERROR_MESSAGE);
 					}
 					else {
 						model.addElement(newSignal);

@@ -28,7 +28,10 @@ public class ReadSigConfigPanel extends SignalConfiguratorPanel {
 				try {
 					newSignal = new ReadSignal(JOptionPane.showInputDialog("Choose a name for the signal"));
 					if (model.contains(newSignal)) {
-						JOptionPane.showMessageDialog(btnCreateNewSignal,  "No dupes please");
+						JOptionPane.showMessageDialog(btnCreateNewSignal,
+								dupeSigErrorString,
+								"Error",
+								JOptionPane.ERROR_MESSAGE);
 					}
 					else {
 						model.addElement(newSignal);
