@@ -20,6 +20,7 @@ import javax.swing.BoxLayout;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import se.esss.litterbox.icebox.exceptions.IceCubeException;
 import se.esss.litterbox.icebox.icetray.IceCube;
 import se.esss.litterbox.icebox.icetray.icecube.Signal;
 
@@ -167,8 +168,12 @@ public class ConfigureIceTray {
 					writeSigPanel.model.addElement(i);
 				}
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} catch (IceCubeException e) {
+				JOptionPane.showMessageDialog(frame,
+					e.getMessage(),
+					"Error",
+					JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}
