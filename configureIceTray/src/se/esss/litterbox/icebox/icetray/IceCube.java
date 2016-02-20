@@ -18,6 +18,7 @@ import se.esss.litterbox.icebox.exceptions.SignalException;
 import se.esss.litterbox.icebox.icetray.icecube.ReadSignal;
 import se.esss.litterbox.icebox.icetray.icecube.Signal;
 import se.esss.litterbox.icebox.icetray.icecube.WriteSignal;
+import se.esss.litterbox.icebox.utilities.InputChecker;
 
 public class IceCube {
 	/*
@@ -60,6 +61,9 @@ public class IceCube {
 	public IceCube(JsonObject jsonInput) throws IceCubeException {
 		this.jsonRep = jsonInput;
 		this.name = jsonInput.getString("name");
+		if (!InputChecker.nameChecker(name)){
+			throw new IceCubeException("Illegal IceCube name");
+		}
 
 		List<Signal> tempSignals = new ArrayList<Signal>();
 		List<Signal> tempRSignals = new ArrayList<Signal>();
