@@ -1,4 +1,4 @@
-package systems.icetech.icebox.icetray;
+package se.esss.litterbox.icebox.icetray;
 
 import java.io.BufferedReader;
 import java.io.File;

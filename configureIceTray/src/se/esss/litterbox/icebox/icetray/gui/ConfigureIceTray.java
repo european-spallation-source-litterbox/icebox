@@ -1,4 +1,4 @@
-package systems.icetech.icebox.icetray.gui;
+package se.esss.litterbox.icebox.icetray.gui;
 
 import java.awt.EventQueue;
 
@@ -20,8 +20,8 @@ import javax.swing.BoxLayout;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import systems.icetech.icebox.icetray.IceCube;
-import systems.icetech.icebox.icetray.icecube.Signal;
+import se.esss.litterbox.icebox.icetray.IceCube;
+import se.esss.litterbox.icebox.icetray.icecube.Signal;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;

@@ -1,20 +1,20 @@
-package systems.icetech.icebox.icetray.gui;
+package se.esss.litterbox.icebox.icetray.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
-import systems.icetech.icebox.icetray.icecube.ReadSignal;
+import se.esss.litterbox.icebox.icetray.icecube.WriteSignal;
 
-public class ReadSigConfigPanel extends SignalConfiguratorPanel {
-	
-	private static final long serialVersionUID = -5939126923709442087L;
+public class WriteSigConfigPanel extends SignalConfiguratorPanel {
+
+	private static final long serialVersionUID = 4823931342303696278L;
 	private ActionListener createBtnListener;
 	private ActionListener delBtnListener;
 	int counterInt = 0;
 	
-	public ReadSigConfigPanel() {
+	public WriteSigConfigPanel() {
 		super();
 		delBtnListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -23,13 +23,9 @@ public class ReadSigConfigPanel extends SignalConfiguratorPanel {
 		};
 		createBtnListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ReadSignal newSignal = new ReadSignal(JOptionPane.showInputDialog("Choose a name for the signal"));
-				if (model.contains(newSignal)) {
-					JOptionPane.showMessageDialog(btnCreateNewSignal,  "No dupes please");
-				}
-				else {
-					model.addElement(newSignal);
-				}
+				model.addElement(
+						new WriteSignal(JOptionPane.showInputDialog("Choose a name for the signal"))
+						);
 			}
 		};
 		btnDeleteSel.addActionListener(delBtnListener);
@@ -38,7 +34,6 @@ public class ReadSigConfigPanel extends SignalConfiguratorPanel {
 
 	@Override
 	protected String buttonText() {
-		return "Read Sigs";
+		return "Write Sigs";
 	}
-
 }
