@@ -159,6 +159,7 @@ public class ConfigureIceTray {
 				IceCube iceCubeObj = new IceCube(Json.createReader(new FileReader(chooser.getSelectedFile())).readObject());
 				txtIceTrayName.setText(iceCubeObj.getName());
 				readSigPanel.model.removeAllElements();
+				writeSigPanel.model.removeAllElements();
 				for (Signal i : iceCubeObj.getReadSignals()) {
 					readSigPanel.model.addElement(i);
 				}
