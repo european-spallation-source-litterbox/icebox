@@ -35,6 +35,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JButton;
 
 public class ConfigureIceCube {
 
@@ -45,6 +46,9 @@ public class ConfigureIceCube {
 	private WriteSigConfigPanel writeSigPanel;
 	private final String helpAboutString = "Ice-Tray configuriser.\nFeb 2016";
 	private final String helpHelpString = "You're beyond help.";
+	private JPanel deploymentPanel;
+	private JButton btnBuildIcecube;
+	private JButton btnBuildDeploy;
 
 	/**
 	 * Launch the application.
@@ -101,6 +105,16 @@ public class ConfigureIceCube {
 		
 		writeSigPanel = new WriteSigConfigPanel();
 		primaryPanel.add(writeSigPanel);
+		
+		deploymentPanel = new JPanel();
+		frame.getContentPane().add(deploymentPanel, BorderLayout.SOUTH);
+		deploymentPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		btnBuildIcecube = new JButton("Build IceCube");
+		deploymentPanel.add(btnBuildIcecube);
+		
+		btnBuildDeploy = new JButton("Build & Deploy IceCube");
+		deploymentPanel.add(btnBuildDeploy);
 	}
 
 	private void makeMenuBar() {
