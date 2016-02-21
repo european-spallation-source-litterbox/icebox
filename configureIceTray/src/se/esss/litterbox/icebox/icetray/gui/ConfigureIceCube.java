@@ -23,6 +23,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import se.esss.litterbox.icebox.exceptions.IceCubeException;
 import se.esss.litterbox.icebox.icetray.IceCube;
 import se.esss.litterbox.icebox.icetray.icecube.Signal;
+import se.esss.litterbox.icebox.utilities.GuiTools;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -182,14 +183,13 @@ public class ConfigureIceCube {
 		}
 	}
 	private void saveFile() {
-		List<Signal> allSigs = new ArrayList<Signal>();
-		for (int i=0; i<readSigPanel.model.getSize(); i++) {
-			allSigs.add(readSigPanel.model.elementAt(i));
-		}
-		for (int i=0; i<writeSigPanel.model.getSize(); i++) {
-			allSigs.add(writeSigPanel.model.elementAt(i));
-		}
-		IceCube iceCube = new IceCube(txtIceTrayName.getText(), allSigs);
+		IceCube iceCube = new IceCube(
+				txtIceTrayName.getText(), 
+				GuiTools.getAllSigs(
+						readSigPanel.model, 
+						writeSigPanel.model
+						)
+				);
 		
 		JFileChooser chooser = new JFileChooser();
 		chooser.setCurrentDirectory(new File(System.getProperty("user.home")));
