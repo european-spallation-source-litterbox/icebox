@@ -20,7 +20,9 @@ public class DeployBuildIceCubePanel extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			JOptionPane.showMessageDialog(
 					btnBuildIcecube, 
-					"Build Btn pressed!"
+					"Build IceCube functionality not implemented yet", 
+					"Error", 
+					JOptionPane.ERROR_MESSAGE
 					);
 		}
 	};
@@ -30,7 +32,9 @@ public class DeployBuildIceCubePanel extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			JOptionPane.showMessageDialog(
 					btnBuildIcecube, 
-					"Build&Deploy Btn pressed!"
+					"Build&Deploy IceCube functionality not implemented yet", 
+					"Error", 
+					JOptionPane.ERROR_MESSAGE
 					);
 		}
 	};
