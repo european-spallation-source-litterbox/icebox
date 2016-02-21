@@ -39,13 +39,14 @@ public class DeployBuildIceCubePanel extends JPanel {
 				System.out.println(iceCube);
 				JOptionPane.showMessageDialog(
 						btnBuildIcecube, 
-						"Build IceCube functionality not implemented yet", 
-						"Error", 
-						JOptionPane.ERROR_MESSAGE
+						"IceCube test-build successful", 
+						"Success!", 
+						JOptionPane.INFORMATION_MESSAGE
 						);
 			} catch (IceCubeException e1) {
 				JOptionPane.showMessageDialog(null,
-						e1.getMessage(),
+						"IceCube test-build failed:\n"
+							+ e1.getMessage(),
 						"Error",
 						JOptionPane.ERROR_MESSAGE);
 			}
@@ -70,7 +71,7 @@ public class DeployBuildIceCubePanel extends JPanel {
 		this.wsPanel = wsPanel;
 		setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		btnBuildIcecube = new JButton("Build IceCube");
+		btnBuildIcecube = new JButton("Test-build");
 		btnBuildDeploy = new JButton("Build & Deploy IceCube");
 		
 		btnBuildIcecube.addActionListener(buildBtnListener);
