@@ -97,8 +97,11 @@ public class IceCube {
 		this.epicsProtoString = makeEpicsProtoString();
 	}
 	
-	public IceCube(String nameInput, List<Signal> signalsInput) {
+	public IceCube(String nameInput, List<Signal> signalsInput) throws IceCubeException {
 		this.name = nameInput;
+		if (!InputChecker.nameChecker(name)){
+			throw new IceCubeException("Illegal IceCube name");
+		}
 		this.signals = new ArrayList<Signal>(signalsInput);
 
 		JsonBuilderFactory factory = Json.createBuilderFactory(null);
