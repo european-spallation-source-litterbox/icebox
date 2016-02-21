@@ -26,6 +26,7 @@ public class DeployBuildIceCubePanel extends JPanel {
 	
 	private ActionListener buildBtnListener = new ActionListener() {
 		
+		@SuppressWarnings("unused")
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			IceCube iceCube;
@@ -57,8 +58,41 @@ public class DeployBuildIceCubePanel extends JPanel {
 	};
 	private ActionListener buildDeployBtnListener = new ActionListener() {
 		
+		@SuppressWarnings("unused")
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			IceCube iceCube;
+			EpicsIOC epicsIOC;
+			try {
+				iceCube = new IceCube(
+						nameField.getText(), 
+						GuiTools.getAllSigs(
+								rsPanel.model, 
+								wsPanel.model
+								)
+						);
+				epicsIOC = new EpicsIOC(iceCube);
+				System.out.println(iceCube);
+			} catch (IceCubeException | EpicsIOCException e1) {
+				JOptionPane.showMessageDialog(null,
+						"IceCube test-build failed:\n"
+							+ e1.getMessage(),
+						"Error",
+						JOptionPane.ERROR_MESSAGE);
+			}
+			int retVal = JOptionPane.showConfirmDialog(
+					btnBuildIcecube, 
+					"Continuing will make build &\ndeploy an IceCube, making changes\nto your hard drive.\n\nARE YOU SURE YOU WANT TO CONTINUE?", 
+					"CONFIRM", 
+					JOptionPane.YES_NO_OPTION,
+					JOptionPane.WARNING_MESSAGE
+					);
+			if (retVal == JOptionPane.YES_OPTION) {
+				System.out.println("The lunatic said yes!");
+			}
+			else if (retVal == JOptionPane.NO_OPTION) {
+				System.out.println("Wise.  Very wise.");
+			}
 			JOptionPane.showMessageDialog(
 					btnBuildIcecube, 
 					"Build&Deploy IceCube functionality not implemented yet", 
