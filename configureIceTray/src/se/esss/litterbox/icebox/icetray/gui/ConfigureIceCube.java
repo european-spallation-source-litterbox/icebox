@@ -186,26 +186,34 @@ public class ConfigureIceCube {
 		}
 	}
 	private void saveFile() {
-		IceCube iceCube = new IceCube(
-				txtIceTrayName.getText(), 
-				GuiTools.getAllSigs(
-						readSigPanel.model, 
-						writeSigPanel.model
-						)
-				);
-		
-		JFileChooser chooser = new JFileChooser();
-		chooser.setCurrentDirectory(new File(System.getProperty("user.home")));
-		int retrieval = chooser.showSaveDialog(null);
-		if (retrieval==JFileChooser.APPROVE_OPTION) {
-			try (FileWriter writer = new FileWriter(chooser.getSelectedFile() + ".json")) {
-				writer.write(iceCube.getJsonRep().toString());
-				writer.flush();
-				writer.close();
-			} catch (IOException e) {
-				JOptionPane.showMessageDialog(frame, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-				e.printStackTrace();
+		IceCube iceCube;
+		try {
+			iceCube = new IceCube(
+					txtIceTrayName.getText(), 
+					GuiTools.getAllSigs(
+							readSigPanel.model, 
+							writeSigPanel.model
+							)
+					);
+			
+			JFileChooser chooser = new JFileChooser();
+			chooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+			int retrieval = chooser.showSaveDialog(null);
+			if (retrieval==JFileChooser.APPROVE_OPTION) {
+				try (FileWriter writer = new FileWriter(chooser.getSelectedFile() + ".json")) {
+					writer.write(iceCube.getJsonRep().toString());
+					writer.flush();
+					writer.close();
+				} catch (IOException e) {
+					JOptionPane.showMessageDialog(frame, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+					e.printStackTrace();
+				}
 			}
+		} catch (IceCubeException e1) {
+				JOptionPane.showMessageDialog(frame,
+					e1.getMessage(),
+					"Error",
+					JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	protected void quitProgram() {
