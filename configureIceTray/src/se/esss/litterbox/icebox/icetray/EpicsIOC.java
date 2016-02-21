@@ -20,7 +20,11 @@ public class EpicsIOC {
 	private final IceCube iceCube;
 
 	public EpicsIOC(JsonObject jsonInput) throws IOException, IceCubeException {
-		iceCube = new IceCube(jsonInput);
+		this(new IceCube(jsonInput));
+	}
+	
+	public EpicsIOC(IceCube iceCubeInput) throws IOException {
+		this.iceCube = iceCubeInput;
 		
 		iocNameString = new String(iceCube.getName());
 		// TODO Uncomment the following when deploying on a real ice-cube
