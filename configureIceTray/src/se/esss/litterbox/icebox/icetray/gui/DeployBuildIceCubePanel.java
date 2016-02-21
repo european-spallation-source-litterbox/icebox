@@ -8,12 +8,16 @@ import javax.management.loading.PrivateClassLoader;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import se.esss.litterbox.icebox.utilities.GuiTools;
 
 public class DeployBuildIceCubePanel extends JPanel {
 
 	private static final long serialVersionUID = -6782526862914742436L;
 	private JButton btnBuildIcecube;
 	private JButton btnBuildDeploy;
+	private JTextField nameField;
 	private ReadSigConfigPanel rsPanel;
 	private WriteSigConfigPanel wsPanel;
 	
@@ -21,6 +25,10 @@ public class DeployBuildIceCubePanel extends JPanel {
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			System.out.println(nameField.getText());
+			System.out.println(
+					GuiTools.getAllSigs(rsPanel.model, wsPanel.model)
+					);
 			JOptionPane.showMessageDialog(
 					btnBuildIcecube, 
 					"Build IceCube functionality not implemented yet", 
@@ -42,7 +50,8 @@ public class DeployBuildIceCubePanel extends JPanel {
 		}
 	};
 
-	public DeployBuildIceCubePanel(ReadSigConfigPanel rsPanel, WriteSigConfigPanel wsPanel) {
+	public DeployBuildIceCubePanel(JTextField nameField, ReadSigConfigPanel rsPanel, WriteSigConfigPanel wsPanel) {
+		this.nameField = nameField;
 		this.rsPanel = rsPanel;
 		this.wsPanel = wsPanel;
 		setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));

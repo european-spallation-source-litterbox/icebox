@@ -104,7 +104,10 @@ public class ConfigureIceCube {
 		writeSigPanel = new WriteSigConfigPanel();
 		primaryPanel.add(writeSigPanel);
 		
-		deploymentPanel = new DeployBuildIceCubePanel(readSigPanel, writeSigPanel);
+		deploymentPanel = new DeployBuildIceCubePanel(
+				txtIceTrayName,
+				readSigPanel, 
+				writeSigPanel);
 		frame.getContentPane().add(deploymentPanel, BorderLayout.SOUTH);
 	}
 
