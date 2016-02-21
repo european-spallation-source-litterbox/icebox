@@ -10,6 +10,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import se.esss.litterbox.icebox.exceptions.IceCubeException;
+import se.esss.litterbox.icebox.icetray.IceCube;
 import se.esss.litterbox.icebox.utilities.GuiTools;
 
 public class DeployBuildIceCubePanel extends JPanel {
@@ -25,16 +27,28 @@ public class DeployBuildIceCubePanel extends JPanel {
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			System.out.println(nameField.getText());
-			System.out.println(
-					GuiTools.getAllSigs(rsPanel.model, wsPanel.model)
-					);
-			JOptionPane.showMessageDialog(
-					btnBuildIcecube, 
-					"Build IceCube functionality not implemented yet", 
-					"Error", 
-					JOptionPane.ERROR_MESSAGE
-					);
+			IceCube iceCube;
+			try {
+				iceCube = new IceCube(
+						nameField.getText(), 
+						GuiTools.getAllSigs(
+								rsPanel.model, 
+								wsPanel.model
+								)
+						);
+				System.out.println(iceCube);
+				JOptionPane.showMessageDialog(
+						btnBuildIcecube, 
+						"Build IceCube functionality not implemented yet", 
+						"Error", 
+						JOptionPane.ERROR_MESSAGE
+						);
+			} catch (IceCubeException e1) {
+				JOptionPane.showMessageDialog(null,
+						e1.getMessage(),
+						"Error",
+						JOptionPane.ERROR_MESSAGE);
+			}
 		}
 	};
 	private ActionListener buildDeployBtnListener = new ActionListener() {
