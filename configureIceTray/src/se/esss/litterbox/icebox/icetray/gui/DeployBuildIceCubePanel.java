@@ -9,7 +9,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import se.esss.litterbox.icebox.exceptions.EpicsIOCException;
 import se.esss.litterbox.icebox.exceptions.IceCubeException;
+import se.esss.litterbox.icebox.icetray.EpicsIOC;
 import se.esss.litterbox.icebox.icetray.IceCube;
 import se.esss.litterbox.icebox.utilities.GuiTools;
 
@@ -27,6 +29,7 @@ public class DeployBuildIceCubePanel extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			IceCube iceCube;
+			EpicsIOC epicsIOC;
 			try {
 				iceCube = new IceCube(
 						nameField.getText(), 
@@ -35,6 +38,7 @@ public class DeployBuildIceCubePanel extends JPanel {
 								wsPanel.model
 								)
 						);
+				epicsIOC = new EpicsIOC(iceCube);
 				System.out.println(iceCube);
 				JOptionPane.showMessageDialog(
 						btnBuildIcecube, 
@@ -42,7 +46,7 @@ public class DeployBuildIceCubePanel extends JPanel {
 						"Success!", 
 						JOptionPane.INFORMATION_MESSAGE
 						);
-			} catch (IceCubeException e1) {
+			} catch (IceCubeException | EpicsIOCException e1) {
 				JOptionPane.showMessageDialog(null,
 						"IceCube test-build failed:\n"
 							+ e1.getMessage(),

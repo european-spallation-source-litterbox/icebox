@@ -10,6 +10,7 @@ import java.io.IOException;
 import javax.json.Json;
 import javax.json.JsonObject;
 
+import se.esss.litterbox.icebox.exceptions.EpicsIOCException;
 import se.esss.litterbox.icebox.exceptions.IceCubeException;
 
 public class EpicsIOC {
@@ -19,11 +20,11 @@ public class EpicsIOC {
 	private final File iocTopDir;
 	private final IceCube iceCube;
 
-	public EpicsIOC(JsonObject jsonInput) throws IOException, IceCubeException {
+	public EpicsIOC(JsonObject jsonInput) throws IceCubeException, EpicsIOCException {
 		this(new IceCube(jsonInput));
 	}
 	
-	public EpicsIOC(IceCube iceCubeInput) throws IOException {
+	public EpicsIOC(IceCube iceCubeInput) throws EpicsIOCException {
 		this.iceCube = iceCubeInput;
 		
 		iocNameString = new String(iceCube.getName());
@@ -31,7 +32,7 @@ public class EpicsIOC {
 		//iocTopDir = new File("/home/pi/Apps/epics/"+iocNameString+"IOC/");
 		iocTopDir = new File("/Users/stephenmolloy/Code/gitRepos/icebox/configureIceTray/src/systems/icetech/test/jsonTests/"+iocNameString+"IOC/");
 		if (iocTopDir.exists()) {
-			throw new IOException(iocTopDir + " already exists");
+			throw new EpicsIOCException(iocTopDir + " already exists");
 		}
 	}
 
@@ -247,6 +248,9 @@ public class EpicsIOC {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (IceCubeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (EpicsIOCException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
