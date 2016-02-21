@@ -35,7 +35,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JButton;
 
 public class ConfigureIceCube {
 
@@ -47,8 +46,6 @@ public class ConfigureIceCube {
 	private final String helpAboutString = "Ice-Tray configuriser.\nFeb 2016";
 	private final String helpHelpString = "You're beyond help.";
 	private DeployBuildIceCubePanel deploymentPanel;
-	private JButton btnBuildIcecube;
-	private JButton btnBuildDeploy;
 
 	/**
 	 * Launch the application.
