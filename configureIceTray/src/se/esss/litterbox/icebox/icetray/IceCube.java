@@ -174,6 +174,18 @@ public class IceCube {
 	public List<Signal> getWriteSignals() {
 		return writeSignals;
 	}
+	
+	public int countReadSignals() {
+		return getReadSignals().size();
+	}
+	
+	public int countWriteSignals() {
+		return getWriteSignals().size();
+	}
+	
+	public int countSignals() {
+		return countReadSignals() + countWriteSignals();
+	}
 
 	public static void main(String[] args) {
 		String filepath = "/Users/stephenmolloy/Code/gitRepos/icebox/configureIceTray/src/systems/icetech/test/jsonTests/";
