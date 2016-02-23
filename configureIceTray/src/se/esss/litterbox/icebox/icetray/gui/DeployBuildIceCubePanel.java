@@ -72,17 +72,13 @@ public class DeployBuildIceCubePanel extends JPanel {
 					JOptionPane.WARNING_MESSAGE
 					);
 			if (retVal == JOptionPane.YES_OPTION) {
-				System.out.println("The lunatic said yes!");
+				JOptionPane.showMessageDialog(
+						btnBuildIcecube, 
+						"Build&Deploy IceCube functionality not implemented yet", 
+						"Error", 
+						JOptionPane.ERROR_MESSAGE
+						);
 			}
-			else if (retVal == JOptionPane.NO_OPTION) {
-				System.out.println("Wise.  Very wise.");
-			}
-			JOptionPane.showMessageDialog(
-					btnBuildIcecube, 
-					"Build&Deploy IceCube functionality not implemented yet", 
-					"Error", 
-					JOptionPane.ERROR_MESSAGE
-					);
 		}
 	};
 
