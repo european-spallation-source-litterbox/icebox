@@ -26,30 +26,21 @@ public class DeployBuildIceCubePanel extends JPanel {
 	
 	private ActionListener buildBtnListener = new ActionListener() {
 		
-		@SuppressWarnings("unused")
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			IceCube iceCube;
 			EpicsIOC epicsIOC;
 			try {
-				iceCube = new IceCube(
-						nameField.getText(), 
-						GuiTools.getAllSigs(
-								rsPanel.model, 
-								wsPanel.model
-								)
-						);
-				epicsIOC = new EpicsIOC(iceCube);
-				System.out.println(iceCube);
+				epicsIOC = makeEpicsIOC();
+				System.out.println(makeIceCube());
 				JOptionPane.showMessageDialog(
 						btnBuildIcecube, 
-						"IceCube test-build successful", 
+						"Test-build successful", 
 						"Success!", 
 						JOptionPane.INFORMATION_MESSAGE
 						);
 			} catch (IceCubeException | EpicsIOCException e1) {
 				JOptionPane.showMessageDialog(null,
-						"IceCube test-build failed:\n"
+						"Test-build failed:\n"
 							+ e1.getMessage(),
 						"Error",
 						JOptionPane.ERROR_MESSAGE);
@@ -58,20 +49,13 @@ public class DeployBuildIceCubePanel extends JPanel {
 	};
 	private ActionListener buildDeployBtnListener = new ActionListener() {
 		
-		@SuppressWarnings("unused")
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			IceCube iceCube;
 			EpicsIOC epicsIOC;
 			try {
-				iceCube = new IceCube(
-						nameField.getText(), 
-						GuiTools.getAllSigs(
-								rsPanel.model, 
-								wsPanel.model
-								)
-						);
-				epicsIOC = new EpicsIOC(iceCube);
+				iceCube = makeIceCube();
+				epicsIOC = makeEpicsIOC();
 				System.out.println(iceCube);
 			} catch (IceCubeException | EpicsIOCException e1) {
 				JOptionPane.showMessageDialog(null,
@@ -117,5 +101,18 @@ public class DeployBuildIceCubePanel extends JPanel {
 		add(btnBuildIcecube);
 		add(btnBuildDeploy);
 	}
+
+	private IceCube makeIceCube() throws IceCubeException {
+		return new IceCube(
+				nameField.getText(), 
+				GuiTools.getAllSigs(
+						rsPanel.model, 
+						wsPanel.model
+						)
+				);
+	}
 	
+	private EpicsIOC makeEpicsIOC() throws EpicsIOCException, IceCubeException {
+		return new EpicsIOC(makeIceCube());
+	}
 }
