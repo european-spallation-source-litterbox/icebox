@@ -31,4 +31,7 @@
   		<version>1.0</version>
   	</dependency>
   </dependencies>
+  <scm>
+  	<url>https://github.com/se-esss-litterbox/icebox.git</url>
+  </scm>
 </project>
