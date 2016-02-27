@@ -57,27 +57,27 @@ public class DeployBuildIceCubePanel extends JPanel {
 				iceCube = makeIceCube();
 				epicsIOC = makeEpicsIOC();
 				System.out.println(iceCube);
+				int retVal = JOptionPane.showConfirmDialog(
+						btnBuildIcecube, 
+						"Continuing will make build &\ndeploy an IceCube, making changes\nto your hard drive.\n\nARE YOU SURE YOU WANT TO CONTINUE?", 
+						"CONFIRM", 
+						JOptionPane.YES_NO_OPTION,
+						JOptionPane.WARNING_MESSAGE
+						);
+				if (retVal == JOptionPane.YES_OPTION) {
+					JOptionPane.showMessageDialog(
+							btnBuildIcecube, 
+							"Build&Deploy IceCube functionality not implemented yet", 
+							"Error", 
+							JOptionPane.ERROR_MESSAGE
+							);
+				}
 			} catch (IceCubeException | EpicsIOCException e1) {
 				JOptionPane.showMessageDialog(null,
 						"IceCube test-build failed:\n"
 							+ e1.getMessage(),
 						"Error",
 						JOptionPane.ERROR_MESSAGE);
-			}
-			int retVal = JOptionPane.showConfirmDialog(
-					btnBuildIcecube, 
-					"Continuing will make build &\ndeploy an IceCube, making changes\nto your hard drive.\n\nARE YOU SURE YOU WANT TO CONTINUE?", 
-					"CONFIRM", 
-					JOptionPane.YES_NO_OPTION,
-					JOptionPane.WARNING_MESSAGE
-					);
-			if (retVal == JOptionPane.YES_OPTION) {
-				JOptionPane.showMessageDialog(
-						btnBuildIcecube, 
-						"Build&Deploy IceCube functionality not implemented yet", 
-						"Error", 
-						JOptionPane.ERROR_MESSAGE
-						);
 			}
 		}
 	};
