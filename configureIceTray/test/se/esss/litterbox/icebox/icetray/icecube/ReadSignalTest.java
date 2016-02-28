@@ -2,9 +2,19 @@ package se.esss.litterbox.icebox.icetray.icecube;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
 
+import se.esss.litterbox.icebox.exceptions.SignalException;
+
 public class ReadSignalTest {
+	
+	ReadSignal testReadSignal;
+	
+	@Before
+	public void setUp() throws SignalException {
+		testReadSignal = new ReadSignal("testName");
+	}
 
 	@Test
 	public void testWriteEPICSRecord() {
@@ -33,7 +43,7 @@ public class ReadSignalTest {
 
 	@Test
 	public void testIsRead() {
-		fail("Not yet implemented");
+		assertTrue("isread() should be true for ReadSignals", testReadSignal.isRead());
 	}
 
 	@Test
