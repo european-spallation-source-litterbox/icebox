@@ -3,7 +3,6 @@ package se.esss.litterbox.icebox.icetray.icecube;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -49,18 +48,21 @@ public class ReadSignalTest {
 				testReadSignal.getRecordType());
 	}
 
+	@SuppressWarnings("unused")
 	@Test
 	public void testEmptyName() throws SignalException, IceCubeException {
 		thrown.expect(SignalException.class);
 		ReadSignal readSignal = new ReadSignal("");
 	}
 
+	@SuppressWarnings("unused")
 	@Test
 	public void testFirstCharDigitName() throws SignalException, IceCubeException {
 		thrown.expect(SignalException.class);
 		ReadSignal readSignal = new ReadSignal("1asd");
 	}
 
+	@SuppressWarnings("unused")
 	@Test
 	public void testWhiteSpaceInName() throws SignalException, IceCubeException {
 		thrown.expect(SignalException.class);
