@@ -4,11 +4,16 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
+import se.esss.litterbox.icebox.exceptions.IceCubeException;
 import se.esss.litterbox.icebox.exceptions.SignalException;
 
 public class ReadSignalTest {
+	@Rule
+    public ExpectedException thrown = ExpectedException.none();
 	
 	ReadSignal testReadSignal;
 	String sigName = "testName";
@@ -16,30 +21,6 @@ public class ReadSignalTest {
 	@Before
 	public void setUp() throws SignalException {
 		testReadSignal = new ReadSignal(sigName);
-	}
-
-	@Test
-	@Ignore
-	public void testWriteEPICSRecord() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	@Ignore
-	public void testWriteEPICSProtoFunc() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	@Ignore
-	public void testBuildJsonRep() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	@Ignore
-	public void testGetJsonRep() {
-		fail("Not yet implemented");
 	}
 
 	@Test
@@ -52,30 +33,6 @@ public class ReadSignalTest {
 	@Test
 	public void testIsRead() {
 		assertTrue("isread() should be true for ReadSignals", testReadSignal.isRead());
-	}
-
-	@Test
-	@Ignore
-	public void testEqualsObject() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	@Ignore
-	public void testReadSignalJsonObject() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	@Ignore
-	public void testReadSignalStringString() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	@Ignore
-	public void testReadSignalString() {
-		fail("Not yet implemented");
 	}
 
 	@Test
@@ -93,27 +50,21 @@ public class ReadSignalTest {
 	}
 
 	@Test
-	@Ignore
-	public void testSignalJsonObject() {
-		fail("Not yet implemented");
+	public void testEmptyName() throws SignalException, IceCubeException {
+		thrown.expect(SignalException.class);
+		ReadSignal readSignal = new ReadSignal("");
 	}
 
 	@Test
-	@Ignore
-	public void testSignalString() {
-		fail("Not yet implemented");
+	public void testFirstCharDigitName() throws SignalException, IceCubeException {
+		thrown.expect(SignalException.class);
+		ReadSignal readSignal = new ReadSignal("1asd");
 	}
 
 	@Test
-	@Ignore
-	public void testEpicsDBFieldString() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	@Ignore
-	public void testCheckName() {
-		fail("Not yet implemented");
+	public void testWhiteSpaceInName() throws SignalException, IceCubeException {
+		thrown.expect(SignalException.class);
+		ReadSignal readSignal = new ReadSignal("a signal");
 	}
 
 	@Test
@@ -122,20 +73,13 @@ public class ReadSignalTest {
 	}
 
 	@Test
-	@Ignore
-	public void testToString() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	public void testGetName() {
 		assertEquals(sigName, testReadSignal.getName());
 	}
 
 	@Test
-	@Ignore
 	public void testGetPvName() {
-		fail("Not yet implemented");
+		assertEquals("PVname should be name plus :get", sigName+":get", testReadSignal.getPvName());
 	}
 
 }
