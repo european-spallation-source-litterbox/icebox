@@ -2,6 +2,7 @@ package se.esss.litterbox.icebox.utilities;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,7 +24,7 @@ public final class InputChecker {
 		return true;
 	}
 	
-	public static Boolean signalListChecker(ArrayList<Signal> signalList) {
+	public static Boolean signalListChecker(List<Signal> signalList) {
 		ArrayList<String> nameList = new ArrayList<String>(signalList.size());
 		for (Signal signal : signalList) {
 			nameList.add(signal.getName());
