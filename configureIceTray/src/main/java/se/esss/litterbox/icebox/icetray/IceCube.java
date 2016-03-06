@@ -87,6 +87,10 @@ public class IceCube {
 			}
 		}
 		
+		if (!InputChecker.signalListChecker(signals)) {
+			throw new IceCubeException("Duplicate signals not allowed in an IceCube");
+		}
+		
 		this.epicsDBString = makeEpicsDBString(dbFileName);
 		this.epicsProtoString = makeEpicsProtoString();
 	}
@@ -111,6 +115,10 @@ public class IceCube {
 		}
 		jBuilder.add("signals", signalArrayBuilder);
 		this.jsonRep = jBuilder.build();
+		
+		if (!InputChecker.signalListChecker(signals)) {
+			throw new IceCubeException("Duplicate signals not allowed in an IceCube");
+		}
 		
 		this.epicsDBString = makeEpicsDBString(dbFileName);
 		this.epicsProtoString = makeEpicsProtoString();
