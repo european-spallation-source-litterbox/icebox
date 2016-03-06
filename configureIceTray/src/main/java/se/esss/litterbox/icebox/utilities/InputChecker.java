@@ -1,7 +1,12 @@
 package se.esss.litterbox.icebox.utilities;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import se.esss.litterbox.icebox.icetray.icecube.Signal;
 
 public final class InputChecker {
 
@@ -16,6 +21,16 @@ public final class InputChecker {
 		Matcher matcher = pattern.matcher(name);
 		if (matcher.find()) return false;
 		return true;
+	}
+	
+	public static Boolean signalListChecker(ArrayList<Signal> signalList) {
+		ArrayList<String> nameList = new ArrayList<String>(signalList.size());
+		for (Signal signal : signalList) {
+			nameList.add(signal.getName());
+		}
+		
+		Set<String> set = new HashSet<String>(nameList);
+		return set.size() == signalList.size();
 	}
 
 }
