@@ -50,8 +50,8 @@ public class IceCube {
 	 */
 	private final String name;
 	private final List<Signal> signals;
-	private List<Signal> readSignals;
-	private List<Signal> writeSignals; 
+	private List<Signal> readSignals = new ArrayList<Signal>();
+	private List<Signal> writeSignals = new ArrayList<Signal>(); 
 	private final JsonObject jsonRep;
 	private final String epicsDBString; // the contents of the EPICS DB defn file
 	private final String epicsProtoString; // the contents of the EPICS proto file
@@ -61,37 +61,31 @@ public class IceCube {
 	public IceCube(JsonObject jsonInput) throws IceCubeException {
 		this.jsonRep = jsonInput;
 		this.name = jsonInput.getString("name");
+		this.signals = new ArrayList<Signal>();
 		if (!InputChecker.nameChecker(name)){
 			throw new IceCubeException("Illegal IceCube name");
 		}
 
-		List<Signal> tempSignals = new ArrayList<Signal>();
-		List<Signal> tempRSignals = new ArrayList<Signal>();
-		List<Signal> tempWSignals = new ArrayList<Signal>();
 		JsonArray jsonSigs = jsonInput.getJsonArray("signals");
 		for (int i=0; i<jsonSigs.size(); i++) {
 			JsonObject jsonObj = jsonSigs.getJsonObject(i);
 			if (jsonObj.getString("RW").equals("R")) {
 				try {
-					tempSignals.add(new ReadSignal(jsonObj));
-					tempRSignals.add(new ReadSignal(jsonObj));
+					this.signals.add(new ReadSignal(jsonObj));
+					this.readSignals.add(new ReadSignal(jsonObj));
 				} catch (SignalException e) {
 					throw new IceCubeException(e.getMessage());
 				}
 			}
 			else if (jsonObj.getString("RW").equals("W")) {
 				try {
-					tempSignals.add(new WriteSignal(jsonObj));
-					tempWSignals.add(new WriteSignal(jsonObj));
+					this.signals.add(new WriteSignal(jsonObj));
+					this.writeSignals.add(new WriteSignal(jsonObj));
 				} catch (SignalException e) {
 					throw new IceCubeException(e.getMessage());
 				}
 			}
 		}
-		
-		this.readSignals = new ArrayList<Signal>(tempRSignals);
-		this.writeSignals = new ArrayList<Signal>(tempWSignals);
-		this.signals = new ArrayList<Signal>(tempSignals);
 		
 		this.epicsDBString = makeEpicsDBString(dbFileName);
 		this.epicsProtoString = makeEpicsProtoString();
@@ -103,6 +97,10 @@ public class IceCube {
 			throw new IceCubeException("Illegal IceCube name");
 		}
 		this.signals = new ArrayList<Signal>(signalsInput);
+		for (Signal sig : signalsInput) {
+			if (sig.isRead()) this.readSignals.add(sig);
+			if (sig.isWrite()) this.writeSignals.add(sig);
+		}
 
 		JsonBuilderFactory factory = Json.createBuilderFactory(null);
 		JsonObjectBuilder jBuilder = factory.createObjectBuilder()
