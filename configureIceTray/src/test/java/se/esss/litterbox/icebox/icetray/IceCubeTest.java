@@ -33,11 +33,6 @@ public class IceCubeTest {
 		
 		testCube = new IceCube(iceCubeName, signalList);
 	}
-	
-	@Test
-	public void testIceCubeConstructor() {
-		assertNotNull(testCube.countSignals());
-	}
 
 	@Test
 	@Ignore
