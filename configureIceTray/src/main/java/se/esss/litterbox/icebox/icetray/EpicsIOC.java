@@ -36,7 +36,7 @@ public class EpicsIOC {
 		}
 	}
 
-	public void makeIceIOC() throws IOException {
+	public void makeIceIOC() throws IOException, EpicsIOCException {
 		makeBasicIOC();
 		
 		fixConfigureRelease();
@@ -140,10 +140,10 @@ public class EpicsIOC {
 		releaseFileWriter.close();
 	}
 
-	private void writeProtoFile() throws IOException {
+	private void writeProtoFile() throws IOException, EpicsIOCException {
 		File protoFile = new File(iocTopDir + File.separator + iocNameString + "IOCApp/Db/arduino.proto");
 		if (!protoFile.createNewFile()) {
-			throw new IOException("Could not create " + protoFile);
+			throw new EpicsIOCException("Could not create " + protoFile);
 		}
 		protoFileWriter = new FileWriter(protoFile);
 		
@@ -152,10 +152,10 @@ public class EpicsIOC {
 		protoFileWriter.close();
 	}
 
-	private void writeDBFile() throws IOException {
+	private void writeDBFile() throws EpicsIOCException, IOException {
 		File dbFile = new File(iocTopDir + File.separator + iocNameString + "IOCApp/Db/arduino.db");
 		if (!dbFile.createNewFile()) {
-			throw new IOException("Could not create " + dbFile);
+			throw new EpicsIOCException("Could not create " + dbFile);
 		}
 		dbFileWriter = new FileWriter(dbFile);
 		
@@ -164,23 +164,23 @@ public class EpicsIOC {
 		dbFileWriter.close();
 	}
 
-	private void makeBasicIOC() throws IOException {
+	private void makeBasicIOC() throws EpicsIOCException, IOException {
 		if (!iocTopDir.mkdir()) {
-			throw new IOException("Could not create " + iocTopDir);
+			throw new EpicsIOCException("Could not create " + iocTopDir);
 		}
 		// TODO replace the following method with makeBaseApp.pl, etc.
 		pretendForDevEnv();
 	}
 
-	private void pretendForDevEnv() throws IOException {
+	private void pretendForDevEnv() throws IOException, EpicsIOCException {
 		// TODO This entire method is only here for the dev env. It needs to be replaced with makeBaseApp.pl, etc.
 		File dbDir = new File(iocTopDir + File.separator + iocNameString + "IOCApp/Db/");
 		if (!dbDir.mkdirs()) {
-			throw new IOException("Could not create " + dbDir);
+			throw new EpicsIOCException("Could not create " + dbDir);
 		}
 		File dbMakefileFile = new File(dbDir + File.separator + "Makefile");
 		if (!dbMakefileFile.createNewFile()) {
-			throw new IOException("Could not create " + dbMakefileFile);
+			throw new EpicsIOCException("Could not create " + dbMakefileFile);
 		}
 		FileWriter dbMakefileWriter = new FileWriter(dbMakefileFile);
 		dbMakefileWriter.append("blah blah\n");
@@ -193,16 +193,16 @@ public class EpicsIOC {
 		
 		File configDir = new File(iocTopDir + File.separator + "configure");
 		if (!configDir.mkdir()) {
-			throw new IOException("Could not create " + configDir);
+			throw new EpicsIOCException("Could not create " + configDir);
 		}
 		
 		File srcDir = new File(iocTopDir + File.separator + iocNameString + "IOCApp/src/");
 		if (!srcDir.mkdirs()) {
-			throw new IOException("Could not create " + srcDir);
+			throw new EpicsIOCException("Could not create " + srcDir);
 		}
 		File srcMakefileFile = new File(srcDir + File.separator + "Makefile");
 		if (!srcMakefileFile.createNewFile()) {
-			throw new IOException("Could not create " + srcMakefileFile);
+			throw new EpicsIOCException("Could not create " + srcMakefileFile);
 		}
 		FileWriter srcMakefileWriter = new FileWriter(srcMakefileFile);
 		srcMakefileWriter.append("blah blah\n");
@@ -216,16 +216,16 @@ public class EpicsIOC {
 		
 		File releaseFile = new File(configDir + File.separator + "RELEASE");
 		if (!releaseFile.createNewFile()) {
-			throw new IOException("Could not create " + releaseFile);
+			throw new EpicsIOCException("Could not create " + releaseFile);
 		}
 		
 		File stcmdDir = new File(iocTopDir + File.separator + "iocBoot/ioc" + iocNameString + "IOC");
 		if (!stcmdDir.mkdirs()) {
-			throw new IOException("Could not create " + stcmdDir);
+			throw new EpicsIOCException("Could not create " + stcmdDir);
 		}
 		File stcmdFile = new File(stcmdDir + File.separator + "st.cmd");
 		if (!stcmdFile.createNewFile()) {
-			throw new IOException("Could not create " + stcmdFile);
+			throw new EpicsIOCException("Could not create " + stcmdFile);
 		}
 		FileWriter stcmdFileWriter = new FileWriter(stcmdFile);
 		stcmdFileWriter.append("blah blah\n");
