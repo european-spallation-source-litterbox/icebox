@@ -2,7 +2,11 @@ package se.esss.litterbox.icebox.icetray;
 
 import static org.junit.Assert.*;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
+
+import javax.json.Json;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -35,9 +39,16 @@ public class IceCubeTest {
 	}
 
 	@Test
-	@Ignore
-	public void testIceCubeJsonObject() {
-		fail("Not yet implemented"); // TODO
+	public void testIceCubeJsonObject() throws FileNotFoundException, IceCubeException {
+		String filePath = "src/test/resources/example.json";
+		FileReader jsonReader;jsonReader = new FileReader(filePath);
+		IceCube iceCubeObj = new IceCube(Json.createReader(jsonReader).readObject());
+		assertEquals("RPi1", iceCubeObj.getName());
+		assertEquals(2,  iceCubeObj.countSignals());
+		assertEquals(1,  iceCubeObj.countReadSignals());
+		assertEquals(1,  iceCubeObj.countWriteSignals());
+		assertEquals("photoresistor1", iceCubeObj.getReadSignals().get(0).getName());
+		assertEquals("led1", iceCubeObj.getWriteSignals().get(0).getName());
 	}
 
 	@SuppressWarnings("unused")
@@ -64,22 +75,4 @@ public class IceCubeTest {
 			fail(e2.getMessage());
 		}
 	}
-
-	@Test
-	@Ignore
-	public void testGetEpicsDBString() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	@Ignore
-	public void testGetEpicsProtoString() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public void testCountSignals() {
-		assertEquals(4, testCube.countSignals());
-	}
-
 }
