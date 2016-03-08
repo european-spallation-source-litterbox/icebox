@@ -49,8 +49,8 @@ public class ReadSigConfigPanel extends SignalConfiguratorPanel {
 	}
 
 	@Override
-	protected String buttonText() {
-		return "Read Sigs";
+	protected String panelLabel() {
+		return "Read Signals";
 	}
 
 }

@@ -30,7 +30,7 @@ public abstract class SignalConfiguratorPanel extends JPanel {
 	public SignalConfiguratorPanel() {
 		setLayout(new BorderLayout(0, 0));
 		
-		lblSigs = new JLabel(buttonText());
+		lblSigs = new JLabel(panelLabel());
 		lblSigs.setFont(new Font("Lucida Grande", Font.BOLD, 15));
 		lblSigs.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblSigs, BorderLayout.NORTH);
@@ -53,6 +53,6 @@ public abstract class SignalConfiguratorPanel extends JPanel {
 		sigButtonPanel.add(btnCreateNewSignal, BorderLayout.SOUTH);
 	}
 
-	protected abstract String buttonText();
+	protected abstract String panelLabel();
 	
 }

@@ -49,7 +49,7 @@ public class WriteSigConfigPanel extends SignalConfiguratorPanel {
 	}
 
 	@Override
-	protected String buttonText() {
-		return "Write Sigs";
+	protected String panelLabel() {
+		return "Write Signals";
 	}
 }
