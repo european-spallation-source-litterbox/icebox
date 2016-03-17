@@ -28,9 +28,7 @@ public class DeployBuildIceCubePanel extends JPanel {
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			EpicsIOC epicsIOC;
 			try {
-				epicsIOC = makeEpicsIOC();
 				System.out.println(makeIceCube());
 				JOptionPane.showMessageDialog(
 						btnBuildIcecube, 
@@ -38,7 +36,7 @@ public class DeployBuildIceCubePanel extends JPanel {
 						"Success!", 
 						JOptionPane.INFORMATION_MESSAGE
 						);
-			} catch (IceCubeException | EpicsIOCException e1) {
+			} catch (IceCubeException e1) {
 				JOptionPane.showMessageDialog(null,
 						"Test-build failed:\n"
 							+ e1.getMessage(),
