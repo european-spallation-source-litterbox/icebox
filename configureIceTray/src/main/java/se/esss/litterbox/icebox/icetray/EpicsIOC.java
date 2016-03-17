@@ -29,8 +29,8 @@ public class EpicsIOC {
 		
 		iocNameString = new String(iceCube.getName());
 		// TODO Uncomment the following when deploying on a real ice-cube
-		//iocTopDir = new File("/home/pi/Apps/epics/"+iocNameString+"IOC/");
-		iocTopDir = new File("/Users/stephenmolloy/Code/gitRepos/icebox/configureIceTray/src/systems/icetech/test/jsonTests/"+iocNameString+"IOC/");
+		iocTopDir = new File("/home/pi/Apps/epics/"+iocNameString+"IOC/");
+		//iocTopDir = new File("/Users/stephenmolloy/Code/gitRepos/icebox/configureIceTray/src/systems/icetech/test/jsonTests/"+iocNameString+"IOC/");
 		if (iocTopDir.exists()) {
 			throw new EpicsIOCException(iocTopDir + " already exists");
 		}
